@@ -245,4 +245,3 @@ if __name__ == "__main__":
     #print(normalise_input("    he!llo.;' W-orld  "))
     #print(menu(rooms["Reception"]["exits"], "south"))
 
-    #stupid error
