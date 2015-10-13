@@ -71,6 +71,3 @@ rooms = {
     "Parking": room_parking,
     "Office": room_office
 }
-
-
-#Error by ben
