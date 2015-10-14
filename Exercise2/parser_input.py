@@ -9,7 +9,7 @@ skip_words = ['a', 'about', 'all', 'an', 'another', 'any', 'around', 'at',
               'of', 'off', 'oh', 'on', 'please', 'small', 'some', 'soon',
               'that', 'the', 'then', 'this', 'those', 'through', 'till', 'to',
               'towards', 'until', 'us', 'want', 'we', 'what', 'when', 'why',
-              'wish', 'with', 'would', 'you', 'must', 'the', 'to']
+              'wish', 'with', 'would', 'you', 'must', 'the', 'wish', 'that']
 
 
 def filter_words(words, skip_words):
@@ -27,11 +27,14 @@ def filter_words(words, skip_words):
     ['go', 'passage', 'south']
 
     """
+    filtered_words = []
+    
     for word in words:
-        if word in skip_words:
-            words.remove(word)
+        if word not in skip_words:
+            # The function .append() adds an item to the list
+            filtered_words.append(word)
 
-    return words
+    return filtered_words
     
 def remove_punct(text):
     """This function is used to remove all punctuation
@@ -84,8 +87,3 @@ def normalise_input(user_input):
     filtered = filter_words(no_punct.split(), skip_words)
     
     return filtered
-    #
-    # COMPLETE ME!
-    #
-
-print(normalise_input("go south now!"))
