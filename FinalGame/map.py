@@ -35,7 +35,7 @@ room_reception = {
     door and has left it open for travel... So to the north you have the 
     isolation, but looks like something has escaped. You have long term care 
     to the east down a very long corridor, you'd call it a tunnel into darkness.
-    You have the stairs back down to the atrium""",
+    You have the stairs back down to the atrium.""",
 
     "exits":  {"north": "Isolation", "down": "Atrium", "east": "Care"},
 
@@ -48,7 +48,14 @@ room_isolation = {
     "name": "the Isolation Rooms",
 
     "description":
-    """No description yet.""",
+    """You are in the Isolation rooms. You can close your eyes and feel the
+    screams of tourment as helpless people were locked in there small white 
+    rooms to live out their days. The only light is what reflects from the 
+    reception. You trip over. You lad in a puddle, you can't see what it is,
+    but it's too thick to be water... To the north you see a sign saying 
+    'Electro-shock therapy' as you get closer there is a ghostly chill. To the
+    east there is the long term care unit. Back to the light in the south 
+    there is the reception."",
 
     "exits": {"north": "Electro", "south": "Reception", "east": "Care"},
 
