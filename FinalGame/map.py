@@ -86,7 +86,11 @@ room_electro = {
     "name": "Electro-Shock Therapy",
 
     "description":
-    """No description yet.""",
+    """You are in the treatment room for Electro shock therapy. There is a 
+    freezing ghostly chill. The room is bare, just a chair in the middle. It
+    has restraints on but it appears as if someone or something broke out of 
+    them. There is a single window at the back of the room but is crusted with 
+    a sulphar like substance... The only exit is back to the south to Isolation.""",
 
     "exits": {"south": "Isolation"},
 
@@ -99,7 +103,12 @@ room_canteen = {
     "name": "the Canteen",
     
     "description":
-    """No description yet.""",
+    """You are in the Canteen. It is an old style servery, it smells like your 
+    primary school dinners. You see a cupboard slightly ajar. You open it and a 
+    stream of rats comes out which you jump from, they run towards a grand fire 
+    place, once they clear you see they were feasting on scraps of flesh on a 
+    bone. It looks famiiar... To the west is the Atrium. To the east leads a 
+    small passage through to the dining hall.""",
     
     "exits": {"west": "Atrium", "east": "Dining"},
 
@@ -112,7 +121,11 @@ room_dining = {
     "name": "the Dining Room",
     
     "description":
-    """No description yet.""",
+    """You are in the Dining room. It is very grand, it has 3 large chandilliers
+    and stained glass windows around the side. But once you look down its less
+    beautiful, all the tables are upturned or broken. At the far end of the room 
+    you see a table on its side and 4 kitchen knifes have been thrown into the 
+    side of it... To the west you have the small passage back to the canteen.""",
     
     "exits": {"west": "Canteen"},
 
@@ -125,7 +138,13 @@ room_ward = {
     "name": "Ward 1",
     
     "description":
-    """No description yet.""",
+    """You are in the ward. As you walk in you feel unnerved, in the back of 
+    your mind you feel like something horrible happened here. There are about 
+    30 beds, all have them have been destroyed apart from one, just off the 
+    centre of the room is a bed, chair and table sitting perfectly... On the table
+    there is a vase of flowers and they look fresh? To your west are double 
+    doors that lead to the Intensive Care Unit. To the east leads back to the 
+    Atrium.""",
     
     "exits": {"west": "Icu", "east": "Atrium"},
 
@@ -138,7 +157,12 @@ room_icu = {
     "name": "the ICU",
     
     "description":
-    """No description yet.""",
+    """You are in the ICU. There are four beds with life support, as you walked 
+    in you think you hear the life support going and see 4 bodies in the beds,
+    you blink and they are gone. 2 of the beds still have blood stained sheets 
+    on... The door to the north has bed wheel tracks marked in blood going under
+    the door, this leads to the mourge, the windows in the door look frozen. To 
+    east you have the ward.""",
     
     "exits": {"north": "Mourge", "east": "Ward"},
 
@@ -151,7 +175,12 @@ room_mourge = {
     "name": "the Mourge",
     
     "description":
-    """No description yet.""",
+    """You are in the mourge. It is ice cold and you are shivering. You hear a 
+    loud bang from one of the body chambers and as you turn it is open... There
+    is a blood stained slab in the centre next to it lies a tray doctors tools 
+    of the trade, but you get the sense the trade might have not on the dead. 
+    You really feel like running from this room with shivers down your spine.
+    To the south is the only exit back to the ICU.""",
     
     "exits": {"south": "Icu"},
 
@@ -164,7 +193,13 @@ room_basement = {
     "name": "the Basement",
     
     "description":
-    """No description yet.""",
+    """You have come down the service elevator, the only light is that of your 
+    torch. It looks like a workshop but when you look closely you can see little
+    bits of padding left of the walls at it looks like this might of containined
+    isolation rooms. You imagine the suffering of the patients locked up in the 
+    darkness... There is a concealed door to the east and you hear a distance 
+    banging. On the door is says 'FEAR ME' in what looks like blood. You are sure 
+    you can get through though. Or back up the service elevator to the Atrium.""",
     
     "exits": {"up": "Atrium", "east": "Dmourge"},
 
@@ -177,7 +212,12 @@ room_dmourge = {
     "name": "the Disused Mourge",
     
     "description":
-    """No description yet.""",
+    """The door creaks open and you walk into the eary disued mourge. Although
+    you soon belive it's not that disused as on the slab in the middle there lies
+    a body... It doesnt appear to be decomposing and its smells musty not rotting.
+    You don't understand what is going on here, fear begins to overwhelm you. You 
+    look around and all the body chambers seem full? Dread fills your body. The 
+    only exit is west back to the basement.""",
     
     "exits": {"west": "Basement"},
 
