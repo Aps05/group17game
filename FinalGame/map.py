@@ -28,7 +28,14 @@ room_reception = {
     "name": "the Psychiatric Reception",
 
     "description":
-    """No description yet.""",
+    """You are in the Psychiatric Reception. It's very bare and the only light 
+    is a small cracked window. By the marks on the floor it looks like the desk
+    had been dragged infront on the door to the north, it's labelled 'ISOLATION'.
+    But the desk is now in two... Something with immense force, came through that
+    door and has left it open for travel... So to the north you have the 
+    isolation, but looks like something has escaped. You have long term care 
+    to the east down a very long corridor, you'd call it a tunnel into darkness.
+    You have the stairs back down to the atrium""",
 
     "exits":  {"north": "Isolation", "down": "Atrium", "east": "Care"},
 
