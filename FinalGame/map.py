@@ -55,7 +55,7 @@ room_isolation = {
     but it's too thick to be water... To the north you see a sign saying 
     'Electro-shock therapy' as you get closer there is a ghostly chill. To the
     east there is the long term care unit. Back to the light in the south 
-    there is the reception."",
+    there is the reception.""",
 
     "exits": {"north": "Electro", "south": "Reception", "east": "Care"},
 
