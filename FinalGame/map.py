@@ -68,7 +68,12 @@ room_care = {
     "name": "Long Term Care",
 
     "description":
-    """No description yet.""",
+    """You are in the Long Term care ward. This room is quite bright, all the 
+    curtains have been torn down. As you begin to walk in the weather outside 
+    becomes very dark... You can see where all the beds once lay neatly but 
+    they've all been dragged into a corner. A child would call it a play fort, you
+    would see it as protection... To the west you have the dark horrors of the
+    Isolation rooms. To the south you have the dim corridor back to reception.""",
 
     "exits": {"west": "Isolation", "south": "Reception"},
 
