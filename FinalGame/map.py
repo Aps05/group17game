@@ -6,7 +6,16 @@ room_atrium = {
     "name": "Hospital Atrium",
 
     "description":
-    """No description yet.""",
+    """You are in the atrium of what looks like an old hospital. You see that 
+    there are, above in the distance, lights but when you try the switch nothing
+    happens. Your only light comes through small dingy windows. All the furniture 
+    is upturned but the desk catches your eye, it's covered in scratchmarks. Human 
+    scratchmarks. There are several exits from atrium: you can do down to the basement
+    via a service elevator but you see on the door in what appears to be blood the message 
+    'Only venture down weilding defence or your life'. To you're east is a canteen, 
+    maybe you fancy a bite to eat? to your West is the main ward... and finally you 
+    see a spiral staircase leading up has been signposted 'Psychiatric Reception.
+    You really are out of your comfort zone.""",
 
     "exits": {"down": "Basement", "east": "Canteen", "west": "Ward", "up": "Reception"},
 
