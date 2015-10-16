@@ -7,14 +7,14 @@ room_atrium = {
 
     "description":
     """You are in the atrium of what looks like an old hospital. You see that 
-    there are, above in the distance, lights but when you try the switch nothing
+    there are, above in the distance, lights, but when you try the switch nothing
     happens. Your only light comes through small dingy windows. All the furniture 
     is upturned but the desk catches your eye, it's covered in scratchmarks. Human 
-    scratchmarks. There are several exits from atrium: you can do down to the basement
-    via a service elevator but you see on the door in what appears to be blood the message 
-    'Only venture down weilding defence or your life'. To you're east is a canteen, 
-    maybe you fancy a bite to eat? to your West is the main ward... and finally you 
-    see a spiral staircase leading up has been signposted 'Psychiatric Reception.
+    scratchmarks. There are several exits from the atrium: you can go down to the basement
+    via a service elevator but you see on the door in what appears to be blood the message:
+    'Only venture down weilding defence or your life'. To your east is a canteen, 
+    maybe you fancy a bite to eat? To your West is the main ward... and finally, you 
+    see a spiral staircase leading up has been signposted 'Psychiatric Reception.'
     You really are out of your comfort zone.""",
 
     "exits": {"down": "Basement", "east": "Canteen", "west": "Ward", "up": "Reception"},
@@ -32,7 +32,7 @@ room_reception = {
     "description":
     """You are in the Psychiatric Reception. It's very bare and the only light 
     is a small cracked window. By the marks on the floor it looks like the desk
-    had been dragged infront on the door to the north, it's labelled 'ISOLATION'.
+    had been dragged infront of the door to the north, it's labelled 'ISOLATION'.
     But the desk is now in two... Something with immense force, came through that
     door and has left it open for travel... So to the north you have the 
     isolation, but looks like something has escaped. You have long term care 
@@ -53,11 +53,11 @@ room_isolation = {
 
     "description":
     """You are in the Isolation rooms. You can close your eyes and feel the
-    screams of tourment as helpless people were locked in there small white 
+    screams of tourment as helpless people were locked in small white 
     rooms to live out their days. The only light is what reflects from the 
-    reception. You trip over. You lad in a puddle, you can't see what it is,
+    reception. You trip over. You land in a puddle, you can't see what it is,
     but it's too thick to be water... To the north you see a sign saying 
-    'Electro-shock therapy' as you get closer there is a ghostly chill. To the
+    'Electro-shock therapy'. As you get closer there is a ghostly chill. To the
     east there is the long term care unit. Back to the light in the south 
     there is the reception.""",
 
@@ -76,7 +76,7 @@ room_care = {
     "description":
     """You are in the Long Term care ward. This room is quite bright, all the 
     curtains have been torn down. As you begin to walk in the weather outside 
-    becomes very dark... You can see where all the beds once lay neatly but 
+    becomes very dark... You can see where all the beds once lay neatly, but 
     they've all been dragged into a corner. A child would call it a play fort, you
     would see it as protection... To the west you have the dark horrors of the
     Isolation rooms. To the south you have the dim corridor back to reception.""",
@@ -94,11 +94,11 @@ room_electro = {
     "name": "Electro-Shock Therapy",
 
     "description":
-    """You are in the treatment room for Electro shock therapy. There is a 
+    """You are in the treatment room for Electro-shock therapy. There is a 
     freezing ghostly chill. The room is bare, just a chair in the middle. It
     has restraints on but it appears as if someone or something broke out of 
     them. There is a single window at the back of the room but is crusted with 
-    a sulphar like substance... The only exit is back to the south to Isolation.""",
+    a sulphur like substance... The only exit is back to the south to Isolation.""",
 
     "exits": {"south": "Isolation"},
 
@@ -115,8 +115,8 @@ room_canteen = {
     "description":
     """You are in the Canteen. It is an old style servery, it smells like your 
     primary school dinners. You see a cupboard slightly ajar. You open it and a 
-    stream of rats comes out which you jump from, they run towards a grand fire 
-    place, once they clear you see they were feasting on scraps of flesh on a 
+    stream of rats comes out which you jump from. They run towards a grand fire 
+    place. Once they clear you see they were feasting on scraps of flesh on a 
     bone. It looks famiiar... To the west is the Atrium. To the east leads a 
     small passage through to the dining hall.""",
     
@@ -133,10 +133,10 @@ room_dining = {
     "name": "the Dining Room",
     
     "description":
-    """You are in the Dining room. It is very grand, it has 3 large chandilliers
-    and stained glass windows around the side. But once you look down its less
+    """You are in the Dining room. It is very grand, it has 3 large chandeliers
+    and stained glass windows around the side. But once you look down it's less
     beautiful, all the tables are upturned or broken. At the far end of the room 
-    you see a table on its side and 4 kitchen knifes have been thrown into the 
+    you see a table on its side and 4 kitchen knifes, which have been thrown into the 
     side of it... To the west you have the small passage back to the canteen.""",
     
     "exits": {"west": "Canteen"},
@@ -154,7 +154,7 @@ room_ward = {
     "description":
     """You are in the ward. As you walk in you feel unnerved, in the back of 
     your mind you feel like something horrible happened here. There are about 
-    30 beds, all have them have been destroyed apart from one, just off the 
+    30 beds, all have them have been destroyed apart from one. Just off the 
     centre of the room is a bed, chair and table sitting perfectly... On the table
     there is a vase of flowers and they look fresh? To your west are double 
     doors that lead to the Intensive Care Unit. To the east leads back to the 
@@ -173,7 +173,7 @@ room_icu = {
     "name": "the ICU",
     
     "description":
-    """You are in the ICU. There are four beds with life support, as you walked 
+    """You are in the ICU. There are four beds with life support. As you walked 
     in you think you hear the life support going and see 4 bodies in the beds,
     you blink and they are gone. 2 of the beds still have blood stained sheets 
     on... The door to the north has bed wheel tracks marked in blood going under
@@ -193,12 +193,16 @@ room_morgue = {
     "name": "the Morgue",
     
     "description":
-    """You are in the mourge. It is ice cold and you are shivering. You hear a 
+    """You are in the morgue. It is ice cold and you are shivering. You hear a 
     loud bang from one of the body chambers and as you turn it is open... There
-    is a blood stained slab in the centre next to it lies a tray doctors tools 
+    is a blood stained slab in the centre and next to it lies a tray of doctors tools 
     of the trade, but you get the sense the trade might have not on the dead. 
     You really feel like running from this room with shivers down your spine.
     To the south is the only exit back to the ICU.""",
+
+    # What does this mean (the last line mostly)? 
+    # There is a blood stained slab in the centre and next to it lies a tray of doctors tools 
+    # of the trade, but you get the sense the trade might have not on the dead. 
     
     "exits": {"south": "Icu"},
 
@@ -214,12 +218,12 @@ room_basement = {
     
     "description":
     """You have come down the service elevator, the only light is that of your 
-    torch. It looks like a workshop but when you look closely you can see little
-    bits of padding left of the walls at it looks like this might of containined
+    torch. It looks like a workshop, but when you look closely you can see little
+    bits of padding to the left of the walls. It looks like this might have containined
     isolation rooms. You imagine the suffering of the patients locked up in the 
     darkness... There is a concealed door to the east and you hear a distance 
-    banging. On the door is says 'FEAR ME' in what looks like blood. You are sure 
-    you can get through though. Or back up the service elevator to the Atrium.""",
+    banging. On the door it says 'FEAR ME' in what looks like blood. You are sure 
+    you can get through though, or back up the service elevator to the Atrium.""",
     
     "exits": {"up": "Atrium", "east": "Dmorgue"},
 
@@ -234,9 +238,9 @@ room_dmorgue = {
     "name": "the Disused Morgue",
     
     "description":
-    """The door creaks open and you walk into the eary disued morgue. Although
+    """The door creaks open and you walk into the eerie disued morgue. Although
     you soon belive it's not that disused as on the slab in the middle there lies
-    a body... It doesnt appear to be decomposing and it smells musty not rotting.
+    a body... It doesnt appear to be decomposing and it smells musty, not rotting.
     You don't understand what is going on here, fear begins to overwhelm you. You 
     look around and all the body chambers seem full? Dread fills your body. The 
     only exit is west back to the basement.""",
@@ -249,7 +253,7 @@ room_dmorgue = {
 }
 
 rooms = {
-    "Atrium": room_atrium,
+    "Atrium": room_atrium,    # 
     "Reception": room_reception,
     "Isolation": room_isolation,
     "Care": room_care,
