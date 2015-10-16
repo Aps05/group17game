@@ -252,18 +252,33 @@ def execute_take(item_id, room):
     there is no such item in the room, this function prints
     "You cannot take that."
     """
-    inventory.append(items[item_id])
-    room["items"].remove(items[item_id])
-    print("You took ",items[item_id]["name"])
+    global current_mass
+    
+    if item_id not in items:
+        print("There is no such item.")
+    elif (current_mass+items[item_id]["mass"]) > max_mass:
+        print("This item is too heavy. You need to drop something first!")
+        return
+    else:
+        current_mass += items[item_id]["mass"]
+        inventory.append(items[item_id])
+        room["items"].remove(items[item_id])
+        print("You took ",items[item_id]["name"])
 
 def execute_drop(item_id, room):
     """This function takes an item_id as an argument and moves this item from the
     player's inventory to list of items in the current room. However, if there is
     no such item in the inventory, this function prints "You cannot drop that."
     """
-    inventory.remove(items[item_id])
-    room["items"].append(items[item_id])
-    print("You dropped ",items[item_id]["name"])
+    global current_mass
+    
+    if item_id not in items:
+        print("There is no such item.")
+    else:
+        current_mass -= items[item_id]["mass"]
+        inventory.remove(items[item_id])
+        room["items"].append(items[item_id])
+        print("You dropped ",items[item_id]["name"])
 
 def execute_command(command, room):
     """This function takes a command (a list of words as returned by
