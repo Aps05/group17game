@@ -1,60 +1,122 @@
-item_id = {
-    "id": "id",
+item_torch = {
+    "id": "torch",
 
-    "name": "id card",
-
-    "description":
-    """You new shiny student ID card. Expires 1 June 2017.
-You wonder why they have printed a suicide hotline number on it?..."""
-}
-
-item_laptop = {
-    "id": "laptop",
-
-    "name": "laptop",
+    "name": "torch",
 
     "description":
-    "It has seen better days. At least it has a WiFi card!"
+    "Nothing yet"
 }
 
-item_money = {
-    "id": "money",
+item_axe = {
+    "id": "axe",
 
-    "name": "money",
+    "name": "axe",
 
     "description":
-    "This wad of cash is barely enough to pay your tuition fees."
+    "Nothing yet"
 }
 
-item_biscuits = {
-    "id": "biscuits",
+item_salt = {
+    "id": "salt",
 
-    "name": "a pack of biscuits",
+    "name": "salt",
 
-    "description": "A pack of biscuits."
+    "description":
+    "Nothing yet"
 }
 
-item_pen = {
-    "id": "pen",
+item_bible = {
+    "id": "bible",
+
+    "name": "The Holy Bible",
+
+    "description": 
+    "Nothing yet"
+}
+
+item_knife = {
+    "id": "knife",
     
-    "name": "a pen",
+    "name": "a sharp knife",
 
-    "description": "A basic ballpoint pen."
+    "description":
+    "Nothing yet"
 }
 
-item_handbook = {
-    "id": "handbook",
+item_water = {
+    "id": "water",
     
-    "name": "a student handbook",
+    "name": "a bottle of saint water",
 
-    "description": "This student handbook explains everything. Seriously."
+    "description":
+    "Nothing yet"
+}
+
+item_crucifix = {
+    "id": "crucifix",
+    
+    "name": "a Crucifix",
+
+    "description":
+    "Nothing yet"
+}
+
+item_key = {
+    "id": "key",
+    
+    "name": "a rusty key",
+
+    "description":
+    "Nothing yet"
+}
+
+item_beans = {
+    "id": "beans",
+    
+    "name": "a tin of beans",
+
+    "description":
+    "Nothing yet"
+}
+
+item_medicine = {
+    "id": "medicine",
+    
+    "name": "medicine",
+
+    "description":
+    "Nothing yet"
+}
+
+item_shoes = {
+    "id": "shoes",
+    
+    "name": "an old pair of shoes",
+
+    "description":
+    "Nothing yet"
+}
+
+item_notepad = {
+    "id": "notepad",
+    
+    "name": "a notepad",
+    
+    "description":
+    "Nothing yet"
 }
 
 items = {
-    "id": item_id,
-    "laptop": item_laptop,
-    "money": item_money,
-    "biscuits": item_biscuits,
-    "pen": item_pen,
-    "handbook": item_handbook
+    "torch": item_torch,
+    "axe": item_axe,
+    "salt": item_salt,
+    "bible": item_bible,
+    "knife": item_knife,
+    "water": item_water,
+    "crucifix": item_crucifix,
+    "key": item_key,
+    "beans": item_beans,
+    "medicine": item_medicine,
+    "shoes": item_shoes,
+    "notepad": item_notepad
 }

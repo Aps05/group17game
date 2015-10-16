@@ -19,7 +19,9 @@ room_atrium = {
 
     "exits": {"down": "Basement", "east": "Canteen", "west": "Ward", "up": "Reception"},
 
-    "items": [item_biscuits, item_handbook]
+    "items": [item_notepad, item_knife],
+
+    "requirements": []
 }
 
 room_reception = {
@@ -39,7 +41,9 @@ room_reception = {
 
     "exits":  {"north": "Isolation", "down": "Atrium", "east": "Care"},
 
-    "items": []
+    "items": [],
+
+    "requirements": []
 }
 
 room_isolation = {
@@ -59,7 +63,9 @@ room_isolation = {
 
     "exits": {"north": "Electro", "south": "Reception", "east": "Care"},
 
-    "items": []
+    "items": [],
+
+    "requirements": []
 }
 
 room_care = {
@@ -77,7 +83,9 @@ room_care = {
 
     "exits": {"west": "Isolation", "south": "Reception"},
 
-    "items": []
+    "items": [],
+
+    "requirements": []
 }
 
 room_electro = {
@@ -94,7 +102,9 @@ room_electro = {
 
     "exits": {"south": "Isolation"},
 
-    "items": [item_pen]
+    "items": [],
+
+    "requirements": []
 }
 
 room_canteen = {
@@ -112,7 +122,9 @@ room_canteen = {
     
     "exits": {"west": "Atrium", "east": "Dining"},
 
-    "items": []
+    "items": [item_beans],
+
+    "requirements": [item_shoes]
 }
 
 room_dining = {
@@ -129,7 +141,9 @@ room_dining = {
     
     "exits": {"west": "Canteen"},
 
-    "items": []
+    "items": [],
+
+    "requirements": []
 }
 
 room_ward = {
@@ -148,7 +162,9 @@ room_ward = {
     
     "exits": {"west": "Icu", "east": "Atrium"},
 
-    "items": []
+    "items": [],
+
+    "requirements": []
 }
 
 room_icu = {
@@ -166,7 +182,9 @@ room_icu = {
     
     "exits": {"north": "Morgue", "east": "Ward"},
 
-    "items": []
+    "items": [],
+
+    "requirements": []
 }
 
 room_morgue = {
@@ -184,7 +202,9 @@ room_morgue = {
     
     "exits": {"south": "Icu"},
 
-    "items": []
+    "items": [],
+
+    "requirements": []
 }
 
 room_basement = {
@@ -203,7 +223,9 @@ room_basement = {
     
     "exits": {"up": "Atrium", "east": "Dmorgue"},
 
-    "items": []
+    "items": [],
+
+    "requirements": [item_torch, item_shoes]
 }
 
 room_dmorgue = {
@@ -214,14 +236,16 @@ room_dmorgue = {
     "description":
     """The door creaks open and you walk into the eary disued morgue. Although
     you soon belive it's not that disused as on the slab in the middle there lies
-    a body... It doesnt appear to be decomposing and its smells musty not rotting.
+    a body... It doesnt appear to be decomposing and it smells musty not rotting.
     You don't understand what is going on here, fear begins to overwhelm you. You 
     look around and all the body chambers seem full? Dread fills your body. The 
     only exit is west back to the basement.""",
     
     "exits": {"west": "Basement"},
 
-    "items": []
+    "items": [],
+
+    "requirements": []
 }
 
 rooms = {
