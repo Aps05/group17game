@@ -36,7 +36,8 @@ room_tutor = {
     """You are in your personal tutor's office. He intently
 stares at his huge monitor, ignoring you completely.
 On the desk you notice a cup of coffee and an empty
-pack of biscuits. The reception is to the west.""",
+pack of biscuits. He looks like he could really use another biscuit.
+The reception is to the west.""",
 
     "exits": {"west": "Reception"},
 
