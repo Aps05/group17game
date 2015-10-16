@@ -2,8 +2,9 @@ import string
 
 # List of "valid" words (the rest are discarded)
 valid_words = ['north', 'east', 'south', 'west', 'go', 'take', 'drop',
-               'id', 'laptop', 'money', 'biscuits', 'pen', 'handbook',
-               'quit', 'exit', 'menu', 'up', 'down']
+               'knife', 'torch', 'axe', 'salt', 'bible', 'water', 'crucifix'
+               'quit', 'exit', 'menu', 'up', 'down', 'key', 'beans', 'medicine',
+               'shoes', 'notepad']
 
 def filter_words(words, valid_words):
     """This function takes a list of words and returns a copy of the list from

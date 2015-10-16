@@ -132,7 +132,7 @@ def list_of_items(items):
     """
     
     if items == []:
-        return ''
+        return 'no items'
     
     str_items = items[0]["name"]
     skip = False
@@ -264,26 +264,26 @@ def execute_take(item_id, room):
     there is no such item in the room, this function prints
     "You cannot take that."
     """
-    for item in room["items"]:
-        if item_id == item["id"]:
-            inventory.append(items[item_id])
-            room["items"].remove(items[item_id])
-            print("You took",items[item_id]["name"])
-            return
+    if item_id not in items:
+        print("There is no such item.")
+    else:
+        inventory.append(items[item_id])
+        room["items"].remove(items[item_id])
+        print("You took",items[item_id]["name"])
+        return
             
-    print("There is no such item here.")
-
 def execute_drop(item_id, room):
     """This function takes an item_id as an argument and moves this item from the
     player's inventory to list of items in the current room. However, if there is
     no such item in the inventory, this function prints "You cannot drop that."
     """
-    for item in inventory:
-        if item_id == item["id"]:
-            inventory.remove(items[item_id])
-            room["items"].append(items[item_id])
-            print("You dropped ",items[item_id]["name"])
-            return
+    if item_id not in items:
+        print("There is no such item.")
+    else:
+        inventory.remove(items[item_id])
+        room["items"].append(items[item_id])
+        print("You dropped ",items[item_id]["name"])
+        return
     print("You don't have", items[item_id]["name"],".")
 
 def execute_command(command, room):
