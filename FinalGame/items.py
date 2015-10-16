@@ -4,7 +4,8 @@ item_torch = {
     "name": "torch",
 
     "description":
-    "Nothing yet"
+    """An old style black security torch. The bulb seems to flicker but it'll 
+    do the job in a dark room."""
 }
 
 item_axe = {
@@ -13,7 +14,8 @@ item_axe = {
     "name": "axe",
 
     "description":
-    "Nothing yet"
+    """ An old fire axe. Doesn't look sharp enough to break down a door anymore
+    but would do some serious damage to someone if they got in the way of it!"""
 }
 
 item_salt = {
@@ -22,7 +24,9 @@ item_salt = {
     "name": "salt",
 
     "description":
-    "Nothing yet"
+    """A bottle of sea salt used by a chef once upon a time... It reminds you of
+    a book you once read that salt can be used to protect yourself from evil 
+    spirits!"""
 }
 
 item_bible = {
@@ -31,7 +35,8 @@ item_bible = {
     "name": "The Holy Bible",
 
     "description": 
-    "Nothing yet"
+    """A copy of the Holy Bible. You can read the scriptures to learn of the 
+    miracles of the Lord and increase your faith. It will only work for so long"""
 }
 
 item_knife = {
@@ -40,16 +45,18 @@ item_knife = {
     "name": "a sharp knife",
 
     "description":
-    "Nothing yet"
+    """A sharp kitchen knife. It gleams in the light. You need to hold it 
+    carefully it could do some real damage to yourself and others"""
 }
 
 item_water = {
     "id": "water",
     
-    "name": "a bottle of saint water",
+    "name": "a bottle of Holy water",
 
     "description":
-    "Nothing yet"
+    """You pick up some water with a small crucifix in, you determine it's Holy 
+    water. You are aware from a book that it can be used to fight daemons."""
 }
 
 item_crucifix = {
@@ -58,7 +65,8 @@ item_crucifix = {
     "name": "a Crucifix",
 
     "description":
-    "Nothing yet"
+    """The is a small wooden crucifix with a model of Christ on it. You know 
+    that this has great power and can be used to drive away Evil."""
 }
 
 item_key = {
@@ -67,7 +75,8 @@ item_key = {
     "name": "a rusty key",
 
     "description":
-    "Nothing yet"
+    """A rusty key. Looks very similar to the sort of key that was onced used 
+    to access restricted levels in an elevator."""
 }
 
 item_beans = {
@@ -76,7 +85,8 @@ item_beans = {
     "name": "a tin of beans",
 
     "description":
-    "Nothing yet"
+    """An old tin of beans. Look very old but they were made before use-by dates 
+    so they must be edible"""
 }
 
 item_medicine = {
@@ -85,7 +95,9 @@ item_medicine = {
     "name": "medicine",
 
     "description":
-    "Nothing yet"
+    """A small bottle of paracetamol, could be used to increase health by 
+    relieving pain or dropping a fever. Theres not nearly enough to cause 
+    overdose..."""
 }
 
 item_shoes = {
@@ -94,7 +106,8 @@ item_shoes = {
     "name": "an old pair of shoes",
 
     "description":
-    "Nothing yet"
+    """An old pair of shoes. They are a size to big and are quite damp but they 
+    will protect your feet from anything sharp on the floor."""
 }
 
 item_notepad = {
@@ -103,7 +116,8 @@ item_notepad = {
     "name": "a notepad",
     
     "description":
-    "Nothing yet"
+    """A small notepad and pen. It's blank and you could use it to make some notes
+    or draw a picture."""
 }
 
 items = {
