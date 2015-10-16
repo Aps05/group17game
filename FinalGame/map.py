@@ -253,7 +253,7 @@ room_dmorgue = {
 }
 
 rooms = {
-    "Atrium": room_atrium,    # 
+    "Atrium": room_atrium,
     "Reception": room_reception,
     "Isolation": room_isolation,
     "Care": room_care,
