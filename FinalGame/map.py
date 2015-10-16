@@ -161,18 +161,18 @@ room_icu = {
     in you think you hear the life support going and see 4 bodies in the beds,
     you blink and they are gone. 2 of the beds still have blood stained sheets 
     on... The door to the north has bed wheel tracks marked in blood going under
-    the door, this leads to the mourge, the windows in the door look frozen. To 
+    the door, this leads to the morgue, the windows in the door look frozen. To 
     east you have the ward.""",
     
-    "exits": {"north": "Mourge", "east": "Ward"},
+    "exits": {"north": "Morgue", "east": "Ward"},
 
     "items": []
 }
 
-room_mourge = {
-    "id": "Mourge",
+room_morgue = {
+    "id": "Morgue",
     
-    "name": "the Mourge",
+    "name": "the Morgue",
     
     "description":
     """You are in the mourge. It is ice cold and you are shivering. You hear a 
@@ -201,18 +201,18 @@ room_basement = {
     banging. On the door is says 'FEAR ME' in what looks like blood. You are sure 
     you can get through though. Or back up the service elevator to the Atrium.""",
     
-    "exits": {"up": "Atrium", "east": "Dmourge"},
+    "exits": {"up": "Atrium", "east": "Dmorgue"},
 
     "items": []
 }
 
-room_dmourge = {
-    "id": "Dmourge",
+room_dmorgue = {
+    "id": "Dmorgue",
     
-    "name": "the Disused Mourge",
+    "name": "the Disused Morgue",
     
     "description":
-    """The door creaks open and you walk into the eary disued mourge. Although
+    """The door creaks open and you walk into the eary disued morgue. Although
     you soon belive it's not that disused as on the slab in the middle there lies
     a body... It doesnt appear to be decomposing and its smells musty not rotting.
     You don't understand what is going on here, fear begins to overwhelm you. You 
@@ -234,7 +234,7 @@ rooms = {
     "Dining": room_dining,
     "Ward": room_ward,
     "Icu": room_icu,
-    "Mourge": room_mourge,
+    "Morgue": room_morgue,
     "Basement": room_basement,
-    "Dmourge": room_dmourge
+    "Dmorgue": room_dmorgue
 }
