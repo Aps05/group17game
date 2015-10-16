@@ -353,10 +353,10 @@ def move(exits, direction):
 
 # This is the entry point of our program
 def main():
-    current_room
-
+    victory = False
+    
     # Main game loop
-    while True:
+    while not victory:
         # Display game status (room description, inventory etc.)
         print_room(current_room)
         print_inventory_items(inventory)
@@ -366,8 +366,13 @@ def main():
 
         # Execute the player's command
         execute_command(command, current_room)
+        
+        #check victory condition
+        for item in rooms["Tutor"]["items"]:
+            if item["id"] == "biscuits":
+                victory = True
 
-
+    print("Congratulations the tutor is now very happy!")
 
 # Are we being run as a script? If so, run main().
 # '__main__' is the name of the scope in which top-level code executes.
