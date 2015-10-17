@@ -4,7 +4,7 @@ import string
 valid_words = ['north', 'east', 'south', 'west', 'go', 'take', 'drop',
                'knife', 'torch', 'axe', 'salt', 'bible', 'water', 'crucifix',
                'quit', 'exit', 'menu', 'up', 'down', 'key', 'beans', 'medicine',
-               'shoes', 'notepad', 'use']
+               'shoes', 'notepad', 'use', 'inspect']
                
 valid_for_notepad = ['write', 'erase','close', 'view']
 

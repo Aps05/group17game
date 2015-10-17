@@ -11,10 +11,8 @@ player = {
     # Initialising sanity, health and faith values
     "health": 100,
     "sanity": 100,
-    "faith": 100
+    "faith": 50
 }
-
-
 
 def new_game():
     global inventory
