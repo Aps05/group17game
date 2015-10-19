@@ -8,7 +8,7 @@ player = {
     "previous_room": rooms["Atrium"],
 
     # Start with an empty inventory
-    "inventory": [],
+    "inventory": [item_axe],
 
     # Initialising sanity, health and faith values
     "health": 100,

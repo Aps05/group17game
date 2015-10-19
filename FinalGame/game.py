@@ -581,7 +581,7 @@ def attempt_attack(enemy, weapon):
     a 40% chance of dodging that attack. If the player misses the enemy will still
     retaliate.
     """
-    if weapon == "fists":
+    if (weapon == "fists") or (weapon == "fist"):
         power = player["power"]
     else:
         power = items[weapon]["power"]
