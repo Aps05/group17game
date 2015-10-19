@@ -630,8 +630,9 @@ def execute_engage(enemies):
             
             action = input("You must act quickly. > ")
             action = normalise_input(action, valid_for_engage)
-            
-            if (action[0] == "dodge") or (action[0] == "jump"):
+            if action == []:
+                print("Thank makes no sence.")
+            elif (action[0] == "dodge") or (action[0] == "jump"):
                 enemy["health"] = attempt_dodge(enemy)
             elif (action[0] == "attack") or (action[0] == "land"):
                 if len(action) > 1:
