@@ -570,7 +570,7 @@ def attempt_dodge(enemy):
                 else:
                     print("That's not a valid option!\n")
     else:
-        print("You failed to dodge the attack and got hit by the " + enemy["name"] + "for", enemy["power"] + "damage!")
+        print("You failed to dodge the attack and got hit by the " + enemy["name"] + "for", enemy["damage"] + "damage!")
         player["health"] -= enemy["power"]
         
     return enemy["health"]
@@ -581,7 +581,10 @@ def attempt_attack(enemy, weapon):
     a 40% chance of dodging that attack. If the player misses the enemy will still
     retaliate.
     """
-    power = items[weapon]["power"]
+    if weapon == "fists":
+        power = player["power"]
+    else:
+        power = items[weapon]["power"]
     hit_chance = random.randrange(1, 100)
     dodge_chance = random.randrange(1, 100)
     # 80% chance to hit
@@ -602,35 +605,37 @@ def attempt_attack(enemy, weapon):
     else:
         print("You weren't quick enough and got hit by the enemy for", enemy["damage"], "damage.")
         player["health"] -= enemy["damage"]
+        
+    return enemy["health"]
 
 def execute_engage(enemies):
     """This function handles the combat system according the weapons the player
     has at his disposal. If can also use his fists to fight although that will
     almost always get him killed.
     """
-    for enemy in enemies:
-        
-        if player["health"] == 0:
-            print("You've been killed by the " + enemy["name"] + "...")
-            return
-        if enemy["health"] == 0:
-            print("You've killed the " + enemy["name"] + "!")
-            player["current_room"]["enemies"].remove(enemy)
-            return
-                
+    for enemy in enemies:                
         print(list_of_weapons(items))
         print()
         print("You've engaged the " + enemy["name"] + "!\n")
         print("You could try and dodge his next attack, or attack him first.\n")
-        while True:        
+        while True:
+            if player["health"] == 0:
+                print("You've been killed by the " + enemy["name"] + "...")
+                return
+                
+            if enemy["health"] == 0:
+                print("You've killed the " + enemy["name"] + "!")
+                player["current_room"]["enemies"].remove(enemy)
+                return
+            
             action = input("You must act quickly. > ")
             action = normalise_input(action, valid_for_engage)
-            print(action)
+            
             if (action[0] == "dodge") or (action[0] == "jump"):
                 enemy["health"] = attempt_dodge(enemy)
             elif (action[0] == "attack") or (action[0] == "land"):
                 if len(action) > 1:
-                    if items[action[1]] in player["inventory"]:
+                    if (action[1] == "fists") or (action[1] == "fist") or (items[action[1]] in player["inventory"]):
                         enemy["health"] = attempt_attack(enemy, action[1])
                     else:
                         print("You do not have " + items[action[1]]["name"] + ".")
