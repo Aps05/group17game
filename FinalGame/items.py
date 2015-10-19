@@ -1,3 +1,8 @@
+import random
+
+
+note4 = random.randrange(-100, 100)
+
 item_torch = {
     "id": "torch",
 
@@ -217,16 +222,15 @@ item_note3 = {
 item_note4 = {
     "id": "note4",
     
-    "name": "a note numbered -12",
+    "name": "a note numbered "+str(note4),
     
-    "description":
-    """A burnt note. You can barely see the writing on it. '-12'""",
+    "description": "A burnt note. You can barely see the writing on it. '"+str(note4)+"'",
     
     "usable": False,
     
     "power": 0,
     
-    "content": -12
+    "content": note4
 }
 
 item_note5 = {

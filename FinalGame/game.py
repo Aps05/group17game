@@ -294,7 +294,7 @@ def print_menu(exits, room_items, inv_items):
         print_exit(direction, exit_leads_to(exits, direction))
     # Print any items in the room
     for item in room_items:
-        print("TAKE " + item["id"].upper() + " to take " + item["name"] + ".")
+        print("TAKE " + item["id"].upper().strip("1, 2, 3, 4, 5, 6") + " to take " + item["name"] + ".")
     # Print any items in the player's inventory
     for item in inv_items:
         print("DROP " + item["id"].upper() + " to drop your " + item["id"] + ".")
@@ -671,7 +671,7 @@ def prepare_engage(enemies):
     """This function serves as a warning to the player that there are 1 or more
     enemies in the room he entered. He's given the choice of engaging or retreiving.
     """
-    while True:    
+    while True:
         print("You've come across " + list_of_enemies(enemies) + "!")
         print("You cannot proceed unless you can clear the room.")
         print()

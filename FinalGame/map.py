@@ -22,7 +22,7 @@ You really are out of your comfort zone.""",
 
     "exits": {"down": "Basement", "east": "Canteen", "west": "Ward", "up": "Reception"},
 
-    "items": [item_notepad],
+    "items": [item_notepad, item_note4],
 
     "requirements": [],
 
@@ -52,7 +52,7 @@ You have the stairs back down to the atrium.""",
 
     "requirements": [],
 
-    "enemies": [enemy_mutant, enemy_mutant]
+    "enemies": [enemy_mutant, enemy_ghost]
 }
 
 room_isolation = {

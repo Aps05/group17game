@@ -14,6 +14,22 @@ enemy_mutant = {
     "faith": 15
 }
 
+enemy_ghost = {
+    "id": "ghost",
+    
+    "name": "Poltergeist",
+    
+    "description": "There is a super-human mutant patrolling the room.",
+    
+    "health": 70,
+    
+    "damage": 15,
+    
+    "sanity": 20,
+    
+    "faith": 15
+}
+
 enemies = {
     "mutant": enemy_mutant
 }
