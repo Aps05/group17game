@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import random
 import os.path
 from map import rooms
 from player import *
@@ -168,6 +169,41 @@ def save_game():
     
     print("Adventure Saved")
 
+def list_of_enemies(enemies):
+    """This function takes a list of enemies (see enemies.py for the definition) and
+    returns a comma-separated list of enemy names (as a string).
+    """
+    if enemies == []:
+        return 'There are no enemies'
+    
+    str_enemies = ""
+    for enemy in enemies:
+        str_enemies += enemy["name"] + ", "
+        
+    return str_enemies.strip(", ")
+    
+def print_room_enemies(room):
+    """This function takes a room as an input and nicely displays a list of enemies
+    found in this room (followed by a blank line). If there are no items in
+    the room, nothing is printed.
+    """
+    if room["enemies"] != []:
+        enemy_list = list_of_enemies(room["enemies"])
+        string = "There is " + enemy_list + " roaming the room."
+        print(string)
+        print()
+
+def list_of_weapons(items):
+    """
+    """
+    str_weapons = "You have your fists, "
+    for item in player["inventory"]:
+        if item["power"] > 0:
+            str_weapons += item["name"] + ", "
+    
+    str_weapons = str_weapons.strip(", ") + " at your disposal."
+    return str_weapons
+
 def list_of_items(items):
     """This function takes a list of items (see items.py for the definition) and
     returns a comma-separated list of item names (as a string).
@@ -175,15 +211,11 @@ def list_of_items(items):
     if items == []:
         return 'no items'
     
-    str_items = items[0]["name"]
-    skip = False
+    str_items = ""
     for item in items:
-        if skip:
-            str_items += ", " + item["name"]
-        else:
-            skip=True
+        str_items += item["name"] + ", "
         
-    return str_items
+    return str_items.strip(", ")
 
 def print_room_items(room):
     """This function takes a room as an input and nicely displays a list of items
@@ -343,7 +375,7 @@ def print_notepad_menu():
         print("What do you want to do?\n")
     
         user_input = input("> ")
-        user_input = normalise_input(user_input, True)
+        user_input = normalise_input(user_input, valid_for_notepad)
         
         if user_input == []:
             print("That's not a valid command.")
@@ -364,9 +396,9 @@ def execute_go(direction, room):
     (and prints the name of the room into which the player is
     moving). Otherwise, it prints "You cannot go there."
     """
-    
     global player
     if direction in room["exits"]:
+        player["previous_room"] = player["current_room"]
         player["current_room"] = rooms[room["exits"][direction]]
     else:
         print("You can't go that way.")
@@ -405,6 +437,9 @@ def execute_drop(item_id, room):
         return
 
 def execute_use(item_id):
+    """This function checks if item_id is in the player's inventory, checks if
+    that item is usable and executes it's use function.
+    """
     if items[item_id] in player["inventory"]:
         if item_id == "notepad":    
             print_notepad_menu()
@@ -412,6 +447,9 @@ def execute_use(item_id):
         print("You do not have " + items[item_id]["name"])
         
 def execute_inspect(item_id):
+    """This function checks if item_id is in the player's inventory and prints
+    the description of that item.
+    """
     if item_id in items:
         if items[item_id] in player["inventory"]:
             print(items[item_id]["description"])
@@ -419,14 +457,32 @@ def execute_inspect(item_id):
             print("You don't have " + items[item_id]["name"])
     else:
         print("This ites doesn't exist.")
-        
+
+def execute_look(direction, room):
+    """This function 'looks' at the direction the user wants to inspect from the
+    room he is currently at and prints the 'look' description as well as the items
+    and enemies that are in that room.
+    """
+    if direction in room["exits"]:
+        destination = room["exits"][direction]
+        new_room = rooms[destination]
+        print(new_room["look"],"\n")
+        # Player shouldn't be able to see any items or enemies up or down
+        if direction != "down" and direction != "up":
+            print_room_items(new_room)
+            print_room_enemies(new_room)
+        if direction == "up":
+            print("You can't see very cleary up the stairs...")
+    else:
+        print("There is nothing that way.")
+        print()
+    
 def execute_command(command, room):
     """This function takes a command (a list of words as returned by
     normalise_input) and, depending on the type of action (the first word of
     the command: "go", "take", or "drop"), executes either execute_go,
     execute_take, or execute_drop, supplying the second word as the argument.
     """
-
     if 0 == len(command):
         return
 
@@ -462,19 +518,164 @@ def execute_command(command, room):
         else:
             print("Inspect what?")
             
+    elif command[0] == "look":
+        if len(command) > 1:
+            execute_look(command[1], room)
+        else:
+            print("Look where?")
+            
     elif (command[0] == "quit") or (command[0] == "exit"):
         return "Quit"
     else:
         print("This makes no sense.")
 
-def menu(exits, room_items, inv_items):
+def attempt_dodge(enemy):
+    """The player has a 50% chance to successfully dodge an enemy attack,
+    in which case he get's to land 2 of his own freely. Otherwise, he get's hit.
+    """
+    dodge_chance = random.randrange(1, 100)
+    
+    if dodge_chance > 50:
+        print("You managed to dodge the attack. You have enough time to strike swice!\n")
+        # The player can now attack the enemy twice
+        for i in [0, 1]:
+            # If enemy health reaches 0 then exit the function and return 0 as the new health
+            if enemy["health"] <= 0:
+                return 0
+                
+            print(list_of_weapons(items))
+            print("Chose how you wish to attack:")
+            weapon = input("> ")
+            weapon = normalise_input(weapon, valid_weapons)
+            
+            while True:
+                if (weapon[0] == "fists") or (weapon[0] == "fist"):
+                    print("You strike the " + enemy["name"] + " using your fists for", player["power"], "damage.")
+                    enemy["health"] -= player["power"]
+                    break
+                elif weapon[0] == "knife":
+                    if item_knife in player["inventory"]:
+                        print("You strike the " + enemy["name"] + " using your knife for", item_knife["power"], "damage.")
+                        enemy["health"] -= item_knife["power"]
+                        break
+                    else:
+                        print("You don't have a knife!")
+                elif weapon[0] == "axe":
+                    if item_axe in player["inventory"]:
+                        print("You strike the " + enemy["name"] + " using your axe for", item_axe["power"], "damage.")
+                        enemy["health"] -= item_axe["power"]
+                        break
+                    else:
+                        print("You don't have an axe!")
+                else:
+                    print("That's not a valid option!\n")
+    else:
+        print("You failed to dodge the attack and got hit by the " + enemy["name"] + "for", enemy["power"] + "damage!")
+        player["health"] -= enemy["power"]
+        
+    return enemy["health"]
+
+def attempt_attack(enemy, weapon):
+    """The player has an 80% chance of successfully hitting the enemy. The enemy
+    will then retailate by attacking the player back, in which case the player has
+    a 40% chance of dodging that attack. If the player misses the enemy will still
+    retaliate.
+    """
+    power = items[weapon]["power"]
+    hit_chance = random.randrange(1, 100)
+    dodge_chance = random.randrange(1, 100)
+    # 80% chance to hit
+    if hit_chance > 20:
+        print("You've successfully landed your attack dealing",power,"to the " + enemy["name"] + ".\n")
+        enemy["health"] -= power
+        # Check if the enemy died
+        if enemy["health"] <= 0:
+            return 0
+    else:
+        print("The enemy managed to dodge your attack!\n")
+    # Warning the player that the enemy will attack him so he doesn't get lost.
+    input("{ The enemy is retaliating! Hopefully you will be quick enough to dodge him. }")    
+    print()
+    # 40% chance to dodge
+    if dodge_chance > 60:
+        print("You managed to dodge his attack!")
+    else:
+        print("You weren't quick enough and got hit by the enemy for", enemy["damage"], "damage.")
+        player["health"] -= enemy["damage"]
+
+def execute_engage(enemies):
+    """This function handles the combat system according the weapons the player
+    has at his disposal. If can also use his fists to fight although that will
+    almost always get him killed.
+    """
+    for enemy in enemies:
+        
+        if player["health"] == 0:
+            print("You've been killed by the " + enemy["name"] + "...")
+            return
+        if enemy["health"] == 0:
+            print("You've killed the " + enemy["name"] + "!")
+            player["current_room"]["enemies"].remove(enemy)
+            return
+                
+        print(list_of_weapons(items))
+        print()
+        print("You've engaged the " + enemy["name"] + "!\n")
+        print("You could try and dodge his next attack, or attack him first.\n")
+        while True:        
+            action = input("You must act quickly. > ")
+            action = normalise_input(action, valid_for_engage)
+            print(action)
+            if (action[0] == "dodge") or (action[0] == "jump"):
+                enemy["health"] = attempt_dodge(enemy)
+            elif (action[0] == "attack") or (action[0] == "land"):
+                if len(action) > 1:
+                    if items[action[1]] in player["inventory"]:
+                        enemy["health"] = attempt_attack(enemy, action[1])
+                    else:
+                        print("You do not have " + items[action[1]]["name"] + ".")
+                else:
+                    print("Attack using what?")
+            elif (action[0] == "run") or (action[0] == "escape"):
+                print("The " + enemy["name"] + " is on to you. You can't escape.")
+            else:
+                print("This makes no sence.")
+            
+        
+
+def prepare_engage(enemies):
+    """This function serves as a warning to the player that there are 1 or more
+    enemies in the room he entered. He's given the choice of engaging or retreiving.
+    """
+    while True:    
+        print("You've come across " + list_of_enemies(enemies) + "!")
+        print("You cannot proceed unless you can clear the room.")
+        print()
+        print("Do you want to engage or go back?")
+        user_input = input("> ")
+        print()
+        user_input = normalise_input(user_input, valid_for_prepareEngage)
+    
+        if user_input[0] == "engage":
+            execute_engage(enemies)
+            return
+        elif user_input[0] == "back":
+            player["current_room"] = player["previous_room"]
+            return
+        else:
+            print("This makes no sense.")
+            continue
+
+def menu(exits, room_items, inv_items, enemies):
     """This function, given a dictionary of possible exits from a room, and a list
     of items found in the room and carried by the player, prints the menu of
     actions using print_menu() function. It then prompts the player to type an
     action. The players's input is normalised using the normalise_input()
     function before being returned.
     """
-
+    if enemies != []:
+        prepare_engage(enemies)
+        return ""
     # Display menu
     print_menu(exits, room_items, inv_items)
 
@@ -483,7 +684,7 @@ def menu(exits, room_items, inv_items):
     print()
     
     # Normalise the input
-    normalised_user_input = normalise_input(user_input, False)
+    normalised_user_input = normalise_input(user_input, valid_for_menu)
 
     return normalised_user_input
 
@@ -539,7 +740,7 @@ def main():
         print_inventory_items(player["inventory"])
 
         # Show the menu with possible actions and ask the player
-        command = menu(player["current_room"]["exits"], player["current_room"]["items"], player["inventory"])
+        command = menu(player["current_room"]["exits"], player["current_room"]["items"], player["inventory"], player["current_room"]["enemies"])
 
         # Execute the player's command
         menu_option = execute_command(command, player["current_room"])
@@ -553,5 +754,6 @@ def main():
 # See https://docs.python.org/3.4/library/__main__.html for explanation
 if __name__ == "__main__":
     main()
+    #print_room_enemies(rooms["Electro"])
     #save_game()
     #load_game()

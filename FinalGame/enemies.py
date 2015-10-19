@@ -3,6 +3,8 @@ enemy_mutant = {
     
     "name": "Super-Human Mutant",
     
+    "description": "There is a super-human mutant patrolling the room.",
+    
     "health": 100,
     
     "damage": 30,
@@ -10,4 +12,8 @@ enemy_mutant = {
     "sanity": 20,
     
     "faith": 15
+}
+
+enemies = {
+    "mutant": enemy_mutant
 }

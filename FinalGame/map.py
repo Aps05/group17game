@@ -1,4 +1,5 @@
 from items import *
+from enemies import *
 
 room_atrium = {
     "id": "Atrium",
@@ -17,7 +18,7 @@ maybe you fancy a bite to eat? To your West is the main ward... and finally, you
 see a spiral staircase leading up has been signposted 'Psychiatric Reception.'
 You really are out of your comfort zone.""",
 
-    "peak": "This is the room you started in, or at least you think it is.",
+    "look": "This is the room you started in, or at least you think it is.",
 
     "exits": {"down": "Basement", "east": "Canteen", "west": "Ward", "up": "Reception"},
 
@@ -43,13 +44,15 @@ isolation, but looks like something has escaped. You have long term care
 to the east down a very long corridor, you'd call it a tunnel into darkness.
 You have the stairs back down to the atrium.""",
 
+    "look": "Looking carefully into the psychiatric reception.",
+
     "exits":  {"north": "Isolation", "down": "Atrium", "east": "Care"},
 
     "items": [item_bible, item_crucifix],
 
     "requirements": [],
 
-    "enemies": []
+    "enemies": [enemy_mutant]
 }
 
 room_isolation = {
@@ -66,6 +69,8 @@ but it's too thick to be water... To the north you see a sign saying
 'Electro-shock therapy'. As you get closer there is a ghostly chill. To the
 east there is the long term care unit. Back to the light in the south 
 there is the reception.""",
+
+    "look": "You apprehensively peek into the eerie isolation rooms, it looks safe.",
 
     "exits": {"north": "Electro", "south": "Reception", "east": "Care"},
 
@@ -89,6 +94,9 @@ they've all been dragged into a corner. A child would call it a play fort, you
 would see it as protection... To the west you have the dark horrors of the
 Isolation rooms. To the south you have the dim corridor back to reception.""",
 
+    "look": """The sign for the long-term care room looks intact. You can’t hear
+anything crawling around, so assume you it is safe.""",
+
     "exits": {"west": "Isolation", "south": "Reception"},
 
     "items": [],
@@ -109,6 +117,8 @@ freezing ghostly chill. The room is bare, just a chair in the middle. It
 has restraints on but it appears as if someone or something broke out of 
 them. There is a single window at the back of the room but is crusted with 
 a sulphur like substance... The only exit is back to the south to Isolation.""",
+
+    "look": "This room looks disturbing. There is a small cracked glass window.",
 
     "exits": {"south": "Isolation"},
 
@@ -131,6 +141,8 @@ stream of rats comes out which you jump from. They run towards a grand fire
 place. Once they clear you see they were feasting on scraps of flesh on a 
 bone. It looks famiiar... To the west is the Atrium. To the east leads a 
 small passage through to the dining hall.""",
+
+    "look": "Peeking through an ajar door.",
     
     "exits": {"west": "Atrium", "east": "Dining"},
 
@@ -152,6 +164,9 @@ and stained glass windows around the side. But once you look down it's less
 beautiful, all the tables are upturned or broken. At the far end of the room 
 you see a table on its side and 4 kitchen knifes, which have been thrown into the 
 side of it... To the west you have the small passage back to the canteen.""",
+
+    "look": """There are broken oak frames surround the front of the dining room.
+This room looks bountiful, but you wonder if it is guarded by a mutant.""",
     
     "exits": {"west": "Canteen"},
 
@@ -159,7 +174,7 @@ side of it... To the west you have the small passage back to the canteen.""",
 
     "requirements": [],
 
-    "enemy": [enemy_mutant]
+    "enemies": [enemy_mutant]
 }
 
 room_ward = {
@@ -175,6 +190,9 @@ centre of the room is a bed, chair and table sitting perfectly... On the table
 there is a vase of flowers and they look fresh? To your west are double 
 doors that lead to the Intensive Care Unit. To the east leads back to the 
 Atrium.""",
+
+    "look": """Through the glass walls of ward 1, you notice it is completely empty,
+apart from bloody bed sheets and broken medical equipment.""",
     
     "exits": {"west": "Icu", "east": "Atrium"},
 
@@ -197,6 +215,9 @@ you blink and they are gone. 2 of the beds still have blood stained sheets
 on... The door to the north has bed wheel tracks marked in blood going under
 the door, this leads to the morgue, the windows in the door look frozen. To 
 east you have the ward.""",
+
+    "look": """As you peek your head through the double doors, you can see inside
+the ICU room.""",
     
     "exits": {"north": "Morgue", "east": "Ward"},
 
@@ -219,10 +240,12 @@ is a blood stained slab in the centre and next to it lies a tray of doctors tool
 of the trade, but you get the sense the trade might have not on the dead. 
 You really feel like running from this room with shivers down your spine.
 To the south is the only exit back to the ICU.""",
-
     # What does this mean (the last line mostly)? 
     # There is a blood stained slab in the centre and next to it lies a tray of doctors tools 
     # of the trade, but you get the sense the trade might have not on the dead. 
+    
+    "look": """The morgue looks horrific and will most likely lower your sanity 
+by venturing into the room""",    
     
     "exits": {"south": "Icu"},
 
@@ -246,6 +269,9 @@ isolation rooms. You imagine the suffering of the patients locked up in the
 darkness... There is a concealed door to the east and you hear a distance 
 banging. On the door it says 'FEAR ME' in what looks like blood. You are sure 
 you can get through though, or back up the service elevator to the Atrium.""",
+
+    "look": """You can’t see anything in the basement, but you assume it is dark.
+You can see engravings of the number 5 splattered on the lift shaft.""",
     
     "exits": {"up": "Atrium", "east": "Dmorgue"},
 
@@ -268,6 +294,9 @@ a body... It doesnt appear to be decomposing and it smells musty, not rotting.
 You don't understand what is going on here, fear begins to overwhelm you. You 
 look around and all the body chambers seem full? Dread fills your body. The 
 only exit is west back to the basement.""",
+
+    "look": """Looking from the basement into this room, you are filled with fear.
+You know your sanity level will seriously drop if you enter the room.""",
     
     "exits": {"west": "Basement"},
 

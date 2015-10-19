@@ -1,12 +1,19 @@
 import string
 
 # List of "valid" words (the rest are discarded)
-valid_words = ['north', 'east', 'south', 'west', 'go', 'take', 'drop',
+valid_for_menu = ['north', 'east', 'south', 'west', 'go', 'take', 'drop',
                'knife', 'torch', 'axe', 'salt', 'bible', 'water', 'crucifix',
                'quit', 'exit', 'menu', 'up', 'down', 'key', 'beans', 'medicine',
-               'shoes', 'notepad', 'use', 'inspect']
+               'shoes', 'notepad', 'use', 'inspect', 'look']
                
 valid_for_notepad = ['write', 'erase','close', 'view']
+
+valid_for_prepareEngage = ['engage', 'back']
+
+valid_for_engage = ['attack', 'dodge', 'jump', 'run', 'escape', 'fist', 'fists',
+                    'axe', 'knife', 'land']
+                
+valid_weapons = ['fists', 'fist', 'knife', 'axe']
 
 def filter_words(words, valid_words):
     """This function takes a list of words and returns a copy of the list from
@@ -38,7 +45,7 @@ def remove_punct(text):
     return no_punct
 
 
-def normalise_input(user_input, for_notepad):
+def normalise_input(user_input, valid_words):
     """This function removes all punctuation from the string and converts it to
     lower case. It then splits the string into a list of words (also removing
     any extra spaces between words) and further removes all "unimportant"
@@ -49,9 +56,6 @@ def normalise_input(user_input, for_notepad):
     # Remove punctuation and convert to lower case
     user_input = user_input.strip()
     no_punct = remove_punct(user_input).lower()
-    if for_notepad:
-        filtered = filter_words(no_punct.split(), valid_for_notepad)
-    else:
-        filtered = filter_words(no_punct.split(), valid_words)
+    filtered = filter_words(no_punct.split(), valid_words)
     
     return filtered

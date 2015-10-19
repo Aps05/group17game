@@ -7,7 +7,9 @@ item_torch = {
     """An old style black security torch. The bulb seems to flicker but it'll 
 do the job in a dark room.""",
     
-    "usable": False
+    "usable": False,
+    # Items that can't be used as weapons has 0 power
+    "power": 0
 }
 
 item_axe = {
@@ -19,7 +21,9 @@ item_axe = {
     """ An old fire axe. Doesn't look sharp enough to break down a door anymore
 but would do some serious damage to someone if they got in the way of it!""",
     
-    "usable": False
+    "usable": False,
+    
+    "power": 50
 }
 
 item_salt = {
@@ -32,7 +36,9 @@ item_salt = {
 a book you once read that salt can be used to protect yourself from evil 
 spirits!""",
     
-    "usable": False
+    "usable": False,
+    
+    "power": 0
 }
 
 item_bible = {
@@ -44,7 +50,9 @@ item_bible = {
     """A copy of the Holy Bible. You can read the scriptures to learn of the 
 miracles of the Lord and increase your faith. It will only work for so long""",
     
-    "usable": False
+    "usable": False,
+    
+    "power": 0
 }
 
 item_knife = {
@@ -54,9 +62,11 @@ item_knife = {
 
     "description":
     """A sharp kitchen knife. It gleams in the light. You need to hold it 
-carefully it could do some real damage to yourself and others""",
+carefully, it could do some real damage to yourself and others""",
     
-    "usable": False
+    "usable": False,
+    
+    "power": 30
 }
 
 item_water = {
@@ -68,7 +78,9 @@ item_water = {
     """You pick up some water with a small crucifix in, you determine it's Holy 
 water. You are aware from a book that it can be used to fight daemons.""",
     
-    "usable": False
+    "usable": False,
+    
+    "power": 0
 }
 
 item_crucifix = {
@@ -80,7 +92,9 @@ item_crucifix = {
     """The is a small wooden crucifix with a model of Christ on it. You know 
 that this has great power and can be used to drive away Evil.""",
     
-    "usable": False
+    "usable": False,
+    
+    "power": 0
 }
 
 item_key = {
@@ -92,7 +106,9 @@ item_key = {
     """A rusty key. Looks very similar to the sort of key that was onced used 
 to access restricted levels in an elevator.""",
     
-    "usable": False
+    "usable": False,
+    
+    "power": 0
 }
 
 item_beans = {
@@ -104,7 +120,9 @@ item_beans = {
     """An old tin of beans. Look very old but they were made before use-by dates 
 so they must be edible""",
     
-    "usable": False
+    "usable": False,
+    
+    "power": 0
 }
 
 item_medicine = {
@@ -117,7 +135,9 @@ item_medicine = {
 relieving pain or dropping a fever. Theres not nearly enough to cause 
     overdose...""",
     
-    "usable": False
+    "usable": False,
+    
+    "power": 0
 }
 
 item_shoes = {
@@ -129,7 +149,9 @@ item_shoes = {
     """An old pair of shoes. They are a size to big and are quite damp but they 
 will protect your feet from anything sharp on the floor.""",
     
-    "usable": False
+    "usable": False,
+    
+    "power": 0
 }
 
 item_notepad = {
@@ -140,7 +162,9 @@ item_notepad = {
     "description":
     """A small notepad and pen. It's blank and you could use it to make some notes.""",
     
-    "usable": True,    
+    "usable": True,
+    
+    "power": 0,
     
     "content": ["Watch your step!"]
 }
@@ -155,6 +179,8 @@ item_note1 = {
     
     "usable": False,
     
+    "power": 0,
+    
     "content": 37
 }
 
@@ -167,6 +193,8 @@ item_note2 = {
     """A burnt note. You can barely see the writing on it. '23'""",
     
     "usable": False,
+    
+    "power": 0,
     
     "content": 23
 }
@@ -181,6 +209,8 @@ item_note3 = {
     
     "usable": False,
     
+    "power": 0,
+    
     "content": 12
 }
 
@@ -194,20 +224,24 @@ item_note4 = {
     
     "usable": False,
     
+    "power": 0,
+    
     "content": -12
 }
 
 item_note5 = {
     "id": "note5",
     
-    "name": "a note numbered -128",
+    "name": "a note numbered 5",
     
     "description":
-    """A burnt note. You can barely see the writing on it. '-128'""",
+    """A burnt note. You can barely see the writing on it. '5'""",
     
     "usable": False,
     
-    "content": -128
+    "power": 0,
+    
+    "content": 5
 }
 
 item_note6 = {
@@ -219,6 +253,8 @@ item_note6 = {
     """A burnt note. You can barely see the writing on it. '-46'""",
     
     "usable": False,
+    
+    "power": 0,
     
     "content": -46
 }
