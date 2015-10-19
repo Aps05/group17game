@@ -542,14 +542,15 @@ def attempt_dodge(enemy):
             # If enemy health reaches 0 then exit the function and return 0 as the new health
             if enemy["health"] <= 0:
                 return 0
-                
-            print(list_of_weapons(items))
-            print("Chose how you wish to attack:")
-            weapon = input("> ")
-            weapon = normalise_input(weapon, valid_weapons)
             
             while True:
-                if (weapon[0] == "fists") or (weapon[0] == "fist"):
+                print(list_of_weapons(items))
+                print("Chose how you wish to attack:")
+                weapon = input("> ")
+                weapon = normalise_input(weapon, valid_weapons)
+                if (weapon == []):
+                    print("Thank makes no sence.")
+                elif (weapon[0] == "fists") or (weapon[0] == "fist"):
                     print("You strike the " + enemy["name"] + " using your fists for", player["power"], "damage.")
                     enemy["health"] -= player["power"]
                     break
@@ -608,17 +609,33 @@ def attempt_attack(enemy, weapon):
         
     return enemy["health"]
 
+def print_healths(player, enemy):
+    player_health = player // 2
+    player_health_bar = ""
+            
+    for n in range(0, player_health):
+        player_health_bar += "="   
+    print("Your health:  " + player_health_bar)
+    
+    enemy_health = enemy // 2
+    enemy_health_bar = ""
+    
+    for n in range(0, enemy_health):
+        enemy_health_bar += "="   
+    print("Enemy health: " + enemy_health_bar)
+
 def execute_engage(enemies):
     """This function handles the combat system according the weapons the player
     has at his disposal. If can also use his fists to fight although that will
     almost always get him killed.
     """
-    for enemy in enemies:                
+    for enemy in enemies: 
         print(list_of_weapons(items))
         print()
         print("You've engaged the " + enemy["name"] + "!\n")
         print("You could try and dodge his next attack, or attack him first.\n")
         while True:
+            print_healths(player["health"],enemy["health"])
             if player["health"] == 0:
                 print("You've been killed by the " + enemy["name"] + "...")
                 return
@@ -626,8 +643,9 @@ def execute_engage(enemies):
             if enemy["health"] == 0:
                 print("You've killed the " + enemy["name"] + "!")
                 player["current_room"]["enemies"].remove(enemy)
+                enemy["health"] = 100
                 return
-            
+
             action = input("You must act quickly. > ")
             action = normalise_input(action, valid_for_engage)
             if action == []:
@@ -661,8 +679,11 @@ def prepare_engage(enemies):
         user_input = input("> ")
         print()
         user_input = normalise_input(user_input, valid_for_prepareEngage)
-    
-        if user_input[0] == "engage":
+        
+        if user_input == []:
+            print("This makes no sence.")
+            continue
+        elif user_input[0] == "engage":
             execute_engage(enemies)
             return
         elif user_input[0] == "back":
