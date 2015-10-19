@@ -5,28 +5,29 @@ from map import rooms
 from player import *
 from items import *
 from parser_input import *
+from enemies import *
 
-
-def load_room(file):
-    # global tells the function that it should use the "global"
-    # current_room variable instead of create a new one that is
-    # only vissible within this function
-    global current_room
-    #make this true if the CURRENT ROOM line is found
+def load_current_room(file):
+    """This function finds and reads the current_room from a file 'file' and
+    stores it in player['current_room'].
+    """
+    # make this true if the CURRENT ROOM line is found
     found_room = False
     for line in file:
-        #if the room if found the load it in current_room
+        # if the room if found the load it in current_room
         if found_room:
-            current_room = rooms[line]
+            player["current_room"] = rooms[line]
             break
         elif line == "CURRENT ROOM\n":
             found_room = True
             continue
 
 def load_inventory(file):
-    global inventory
+    """This function reads all the inventory items that were stored in a file 'file'
+    and stored them in the player's inventory.
+    """
     #start with an empty inventory
-    inventory = []
+    player["inventory"] = []
     
     found_inventory = False     
     for line in file:
@@ -34,14 +35,18 @@ def load_inventory(file):
             if line == "\n":
                 break
             line = line.strip("\n")
-            inventory.append(items[line])
+            player["inventory"].append(items[line])
         elif (line == "INVENTORY\n"):
             found_inventory = True
             continue
 
-
-
 def load_rooms(file):
+    """This function reads all the room items that were stored in a file 'file'
+    and adds them to the corresponding room.
+    """
+    # global tells the function that it should use the "global"
+    # current_room variable instead of create a new one that is
+    # only vissible within this function
     global rooms
     found_rooms = False
     found_room = ""
@@ -70,12 +75,38 @@ def load_rooms(file):
             continue
 
 def empty_rooms():
+    """This function emptys all the items from all the rooms.
+    """
     global rooms
     for roomId,room in rooms.items():
         rooms[roomId]["items"] = []
         
+def load_notepad(file):
+    """This function finds the line labled 'NOTEPAD' in a file 'file' and stores
+    all the following lines in the contents of item_notepad until it encounters an empty line.
+    """
+    global item_notepad
+    # used to know when the content of the notepad is found
+    found_notepad = False
+    # empty the notepad to used saved content
+    item_notepad["content"] = []
+    
+    for line in file:
+        if found_notepad:
+            if line != "\n":
+                line = line.strip("\n")
+                item_notepad["content"].append(line)
+                continue
+            break
+        elif line == "NOTEPAD\n":
+            # NOTEPAD title found so next line will will include notepad content
+            found_notepad = True
+            continue
 
 def load_game():
+    """This function loads all the information stored in save.txt to restore
+    the game to the state where it was saved.
+    """
     # check if a save file exists
     if not os.path.exists("save.txt"):
         print("You do not have a save file.")
@@ -88,14 +119,19 @@ def load_game():
         # that were storedin save.txt        
         empty_rooms()
         load_rooms(file)
+        # load the notepad
+        load_notepad(file)
         # load the room the player was in        
-        load_room(file)
+        load_current_room(file)
         #close the file
         file.close()
         
         print("Adventure Loaded")        
 
 def save_game():
+    """This function saves all the required information so that the game can be
+    continued exactly from where it was left off. It stores data in save.txt
+    """
     # Re-write the previous saved file
     file = open("save.txt", 'w')
     file = open("save.txt", 'r+')
@@ -103,7 +139,7 @@ def save_game():
     
     # Save inventory
     file.write("INVENTORY\n")
-    for item in inventory:
+    for item in player["inventory"]:
         file.write("%s\n" % item["id"])
     file.write("\n")
     
@@ -117,9 +153,15 @@ def save_game():
             file.write("\n")
     file.write("END ROOMS\n\n")
     
+    # Save the contents of the notepad
+    file.write("NOTEPAD\n")
+    for line in item_notepad["content"]:
+        file.write("%s\n" % line) 
+    file.write("\n")
+    
     # Save current room
     file.write("CURRENT ROOM\n")
-    file.write(current_room["id"])
+    file.write(player["current_room"]["id"])
     
     #close and save
     file.close()
@@ -128,9 +170,8 @@ def save_game():
 
 def list_of_items(items):
     """This function takes a list of items (see items.py for the definition) and
-    returns a comma-separated list of item names (as a string). For example:
+    returns a comma-separated list of item names (as a string).
     """
-    
     if items == []:
         return 'no items'
     
@@ -149,9 +190,8 @@ def print_room_items(room):
     found in this room (followed by a blank line). If there are no items in
     the room, nothing is printed. See map.py for the definition of a room, and
     items.py for the definition of an item. This function uses list_of_items()
-    to produce a comma-separated list of item names. For example:
+    to produce a comma-separated list of item names.
     """
-    
     if room["items"] != []:
         item_list = list_of_items(room["items"])
         string = "There is " + item_list + " here."
@@ -161,9 +201,8 @@ def print_room_items(room):
 def print_inventory_items(items):
     """This function takes a list of inventory items and displays it nicely, in a
     manner similar to print_room_items(). The only difference is in formatting:
-    print "You have ..." instead of "There is ... here.". For example:
+    print "You have ..." instead of "There is ... here."
     """
-    
     item_list = list_of_items(items)
     item_list = "You have " + item_list + "."
     print(item_list)
@@ -176,9 +215,8 @@ def print_room(room):
     is printed in all capitals and framed by blank lines. Then follows the
     description of the room and a blank line again. If there are any items
     in the room, the list of items is printed next followed by a blank line
-    (use print_room_items() for this). For example:
+    (use print_room_items() for this).
     """
-    
     # Display room name
     print()
     print(room["name"].upper())
@@ -190,24 +228,21 @@ def print_room(room):
         print_room_items(room)
         #print()
 
-
 def exit_leads_to(exits, direction):
     """This function takes a dictionary of exits and a direction (a particular
     exit taken from this dictionary). It returns the name of the room into which
-    this exit leads. For example:
+    this exit leads.
     """
-    
     return rooms[exits[direction]]["name"]
 
 
 def print_exit(direction, leads_to):
     """This function prints a line of a menu of exits. It takes a direction (the
     name of an exit) and the name of the room into which it leads (leads_to),
-    and should print a menu line in the following format:
+    and should print a menu line.
     """
     
     print("GO " + direction.upper() + " to " + leads_to + ".")
-
 
 def print_menu(exits, room_items, inv_items):
     """This function displays the menu of available actions to the player. The
@@ -225,14 +260,22 @@ def print_menu(exits, room_items, inv_items):
     for direction in exits:
         # Print the exit name and where it leads to
         print_exit(direction, exit_leads_to(exits, direction))
+    # Print any items in the room
     for item in room_items:
-        print("TAKE " + item["id"].upper() + " to take " + item["name"])
+        print("TAKE " + item["id"].upper() + " to take " + item["name"] + ".")
+    # Print any items in the player's inventory
     for item in inv_items:
-        print("DROP " + item["id"].upper() + " to drop your " + item["name"])
+        print("DROP " + item["id"].upper() + " to drop your " + item["id"] + ".")
+    # Print any items in player's inventory that are usable
+    for item in inv_items:
+        if item["usable"]:
+            print("USE " + item["id"].upper() + " to use your " + item["id"] + ".")
+    # I realise that the "DROP" and "USE" loop can be combined into one loop
+    # but I want all the drop items to be printed 1st and then all the usable items
+    print("INSPECT any of your items.")
     print("Go to main MENU.")
     
     print("What do you want to do?")
-
 
 def is_valid_exit(exits, chosen_exit):
     """This function checks, given a dictionary "exits" (see map.py) and
@@ -241,7 +284,79 @@ def is_valid_exit(exits, chosen_exit):
     the name of the exit has been normalised by the function normalise_input().
     """
     return chosen_exit in exits
+    
+def write_notepad():
+    """This function gets a string from the player and wirtes it in the notepad
+    """
+    # Write to notepad
+    string = input("Write > ")
+    
+    if string == "":
+        return
+    item_notepad["content"].append(string)
+    
+    return
 
+def erase_notepad():
+    """This function gets a line from the user and erases it from the notepad
+    """
+    line_number = int(input("Which line do you want to erase? "))
+    while line_number < 0:
+        print("You can't have a negative line number...")
+        line_number = int(input("Which line do you want to erase? "))
+    # used to count the lines in notepad    
+    n = 0
+    while line_number >= n:
+        n = 0
+        for line in item_notepad["content"]:
+            if line_number == n:
+                item_notepad["content"].remove(line)
+                n += 1
+                break
+            else:
+                n += 1
+                
+    return
+    
+def display_notepad():
+    """This function displays everything that the player wrote in his notepad
+    and allows him to write something new. 
+    """
+    print("NOTEPAD:\n")
+    # used to enumerate lines
+    n = 0
+    for lines in item_notepad["content"]:
+        print(str(n) + ". " + lines)
+        n += 1
+    print()    
+    return
+    
+def print_notepad_menu():
+    """This function prints the notepad menu and receives an input from the user
+    """
+    while True:
+        display_notepad()
+        print("NOTEPAD MENU:\n")
+        print("Write to notepad.")
+        print("Erase from notepad.")
+        print("Close notepad.")
+        print("What do you want to do?\n")
+    
+        user_input = input("> ")
+        user_input = normalise_input(user_input, True)
+        
+        if user_input == []:
+            print("That's not a valid command.")
+        elif user_input[0] == "view":
+            display_notepad()
+        elif user_input[0] == "write":
+            write_notepad()
+        elif user_input[0] == "erase":
+            erase_notepad()
+        elif user_input[0] == "close":
+            return
+        else:
+            print("That's not a valid command.")
 
 def execute_go(direction, room):
     """This function, given the direction (e.g. "south") updates the current room
@@ -250,9 +365,9 @@ def execute_go(direction, room):
     moving). Otherwise, it prints "You cannot go there."
     """
     
-    global current_room
+    global player
     if direction in room["exits"]:
-        current_room = rooms[room["exits"][direction]]
+        player["current_room"] = rooms[room["exits"][direction]]
     else:
         print("You can't go that way.")
         print()
@@ -265,9 +380,11 @@ def execute_take(item_id, room):
     "You cannot take that."
     """
     if item_id not in items:
-        print("There is no such item.")
+        print("This item doesn't exist.")
+    elif items[item_id] not in room["items"]:
+        print("You don't see " + items[item_id]["name"])
     else:
-        inventory.append(items[item_id])
+        player["inventory"].append(items[item_id])
         room["items"].remove(items[item_id])
         print("You took",items[item_id]["name"])
         return
@@ -279,13 +396,30 @@ def execute_drop(item_id, room):
     """
     if item_id not in items:
         print("There is no such item.")
+    elif items[item_id] not in player["inventory"]:
+        print("You don't have " + items[item_id]["name"])
     else:
-        inventory.remove(items[item_id])
+        player["inventory"].remove(items[item_id])
         room["items"].append(items[item_id])
         print("You dropped ",items[item_id]["name"])
         return
-    print("You don't have", items[item_id]["name"],".")
 
+def execute_use(item_id):
+    if items[item_id] in player["inventory"]:
+        if item_id == "notepad":    
+            print_notepad_menu()
+    else:
+        print("You do not have " + items[item_id]["name"])
+        
+def execute_inspect(item_id):
+    if item_id in items:
+        if items[item_id] in player["inventory"]:
+            print(items[item_id]["description"])
+        else:
+            print("You don't have " + items[item_id]["name"])
+    else:
+        print("This ites doesn't exist.")
+        
 def execute_command(command, room):
     """This function takes a command (a list of words as returned by
     normalise_input) and, depending on the type of action (the first word of
@@ -314,14 +448,24 @@ def execute_command(command, room):
         else:
             print("Drop what?")
             
+    elif command[0] == "use":
+        if len(command) > 1:
+            execute_use(command[1])
+        else:
+            print("Use what?")
     elif command[0] == "menu":
-        return "menu"            
-    
+        return "menu"
+        
+    elif command[0] == "inspect":
+        if len(command) > 1:
+            execute_inspect(command[1])
+        else:
+            print("Inspect what?")
+            
     elif (command[0] == "quit") or (command[0] == "exit"):
         return "Quit"
     else:
         print("This makes no sense.")
-
 
 def menu(exits, room_items, inv_items):
     """This function, given a dictionary of possible exits from a room, and a list
@@ -339,7 +483,7 @@ def menu(exits, room_items, inv_items):
     print()
     
     # Normalise the input
-    normalised_user_input = normalise_input(user_input)
+    normalised_user_input = normalise_input(user_input, False)
 
     return normalised_user_input
 
@@ -391,14 +535,14 @@ def main():
     while menu_option != "Quit":
         game_started = True
         # Display game status (room description, inventory etc.)
-        print_room(current_room)
-        print_inventory_items(inventory)
+        print_room(player["current_room"])
+        print_inventory_items(player["inventory"])
 
         # Show the menu with possible actions and ask the player
-        command = menu(current_room["exits"], current_room["items"], inventory)
+        command = menu(player["current_room"]["exits"], player["current_room"]["items"], player["inventory"])
 
         # Execute the player's command
-        menu_option = execute_command(command, current_room)
+        menu_option = execute_command(command, player["current_room"])
         # If player asks for main menu, display main menu
         if menu_option == "menu":
             menu_option = main_menu(game_started)

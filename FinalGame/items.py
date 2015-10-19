@@ -1,21 +1,25 @@
 item_torch = {
     "id": "torch",
 
-    "name": "torch",
+    "name": "a torch",
 
     "description":
     """An old style black security torch. The bulb seems to flicker but it'll 
-    do the job in a dark room."""
+do the job in a dark room.""",
+    
+    "usable": False
 }
 
 item_axe = {
     "id": "axe",
 
-    "name": "axe",
+    "name": "an axe",
 
     "description":
     """ An old fire axe. Doesn't look sharp enough to break down a door anymore
-    but would do some serious damage to someone if they got in the way of it!"""
+but would do some serious damage to someone if they got in the way of it!""",
+    
+    "usable": False
 }
 
 item_salt = {
@@ -25,8 +29,10 @@ item_salt = {
 
     "description":
     """A bottle of sea salt used by a chef once upon a time... It reminds you of
-    a book you once read that salt can be used to protect yourself from evil 
-    spirits!"""
+a book you once read that salt can be used to protect yourself from evil 
+spirits!""",
+    
+    "usable": False
 }
 
 item_bible = {
@@ -36,7 +42,9 @@ item_bible = {
 
     "description": 
     """A copy of the Holy Bible. You can read the scriptures to learn of the 
-    miracles of the Lord and increase your faith. It will only work for so long"""
+miracles of the Lord and increase your faith. It will only work for so long""",
+    
+    "usable": False
 }
 
 item_knife = {
@@ -46,7 +54,9 @@ item_knife = {
 
     "description":
     """A sharp kitchen knife. It gleams in the light. You need to hold it 
-    carefully it could do some real damage to yourself and others"""
+carefully it could do some real damage to yourself and others""",
+    
+    "usable": False
 }
 
 item_water = {
@@ -56,7 +66,9 @@ item_water = {
 
     "description":
     """You pick up some water with a small crucifix in, you determine it's Holy 
-    water. You are aware from a book that it can be used to fight daemons."""
+water. You are aware from a book that it can be used to fight daemons.""",
+    
+    "usable": False
 }
 
 item_crucifix = {
@@ -66,7 +78,9 @@ item_crucifix = {
 
     "description":
     """The is a small wooden crucifix with a model of Christ on it. You know 
-    that this has great power and can be used to drive away Evil."""
+that this has great power and can be used to drive away Evil.""",
+    
+    "usable": False
 }
 
 item_key = {
@@ -76,7 +90,9 @@ item_key = {
 
     "description":
     """A rusty key. Looks very similar to the sort of key that was onced used 
-    to access restricted levels in an elevator."""
+to access restricted levels in an elevator.""",
+    
+    "usable": False
 }
 
 item_beans = {
@@ -86,7 +102,9 @@ item_beans = {
 
     "description":
     """An old tin of beans. Look very old but they were made before use-by dates 
-    so they must be edible"""
+so they must be edible""",
+    
+    "usable": False
 }
 
 item_medicine = {
@@ -96,8 +114,10 @@ item_medicine = {
 
     "description":
     """A small bottle of paracetamol, could be used to increase health by 
-    relieving pain or dropping a fever. Theres not nearly enough to cause 
-    overdose..."""
+relieving pain or dropping a fever. Theres not nearly enough to cause 
+    overdose...""",
+    
+    "usable": False
 }
 
 item_shoes = {
@@ -107,7 +127,9 @@ item_shoes = {
 
     "description":
     """An old pair of shoes. They are a size to big and are quite damp but they 
-    will protect your feet from anything sharp on the floor."""
+will protect your feet from anything sharp on the floor.""",
+    
+    "usable": False
 }
 
 item_notepad = {
@@ -116,8 +138,89 @@ item_notepad = {
     "name": "a notepad",
     
     "description":
-    """A small notepad and pen. It's blank and you could use it to make some notes
-    or draw a picture."""
+    """A small notepad and pen. It's blank and you could use it to make some notes.""",
+    
+    "usable": True,    
+    
+    "content": ["Watch your step!"]
+}
+
+item_note1 = {
+    "id": "note1",
+    
+    "name": "a note numbered 37",
+    
+    "description":
+    """A burnt note. You can barely see the writing on it. '37'""",
+    
+    "usable": False,
+    
+    "content": 37
+}
+
+item_note2 = {
+    "id": "note2",
+    
+    "name": "a note numbered 23",
+    
+    "description":
+    """A burnt note. You can barely see the writing on it. '23'""",
+    
+    "usable": False,
+    
+    "content": 23
+}
+
+item_note3 = {
+    "id": "note3",
+    
+    "name": "a note numbered 12",
+    
+    "description":
+    """A burnt note. You can barely see the writing on it. '12'""",
+    
+    "usable": False,
+    
+    "content": 12
+}
+
+item_note4 = {
+    "id": "note4",
+    
+    "name": "a note numbered -12",
+    
+    "description":
+    """A burnt note. You can barely see the writing on it. '-12'""",
+    
+    "usable": False,
+    
+    "content": -12
+}
+
+item_note5 = {
+    "id": "note5",
+    
+    "name": "a note numbered -128",
+    
+    "description":
+    """A burnt note. You can barely see the writing on it. '-128'""",
+    
+    "usable": False,
+    
+    "content": -128
+}
+
+item_note6 = {
+    "id": "note6",
+    
+    "name": "a note numbered -46",
+    
+    "description":
+    """A burnt note. You can barely see the writing on it. '-46'""",
+    
+    "usable": False,
+    
+    "content": -46
 }
 
 items = {
@@ -132,5 +235,11 @@ items = {
     "beans": item_beans,
     "medicine": item_medicine,
     "shoes": item_shoes,
-    "notepad": item_notepad
+    "notepad": item_notepad,
+    "note1": item_note1,
+    "note2": item_note2,
+    "note3": item_note3,
+    "note4": item_note4,
+    "note5": item_note5,
+    "note6": item_note6
 }
