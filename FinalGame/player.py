@@ -13,7 +13,7 @@ player = {
     "previous_room": rooms["Atrium"],
 
     # Start with an empty inventory
-    "inventory": [item_axe],
+    "inventory": [],
     # The number of items the player can hold at any one time
     "inv_space": 5,
 

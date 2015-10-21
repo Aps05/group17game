@@ -309,7 +309,13 @@ def print_menu(exits, room_items, inv_items):
     print("What do you want to do?")
 
 def print_victory():
-    victory_message = """Congratulations!
+    victory_message = """
+__     _____ ____ _____ ___  ______   ___ 
+\ \   / /_ _/ ___|_   _/ _ \|  _ \ \ / / |
+ \ \ / / | | |     | || | | | |_) \ V /| |
+  \ V /  | | |___  | || |_| |  _ < | | |_|
+   \_/  |___\____| |_| \___/|_| \_\|_| (_)
+
 You have escaped the torments of the asylum. You are the first person ever to
 have done so, so be proud of yourself. However, out in the real world, you might find you can never truly 
 live in reality. Your long, painful journey through the asylum has infected your mind. You are infected so 
@@ -322,7 +328,18 @@ Thanks for playing!
     print(victory_message)
     
 def print_defeat():
-    print("DEFEAT")
+    defeat_message = """
+ ____  _____ _____ _____    _  _____     
+|  _ \| ____|  ___| ____|  / \|_   _|    
+| | | |  _| | |_  |  _|   / _ \ | |      
+| |_| | |___|  _| | |___ / ___ \| |_ _ _ 
+|____/|_____|_|   |_____/_/   \_\_(_|_|_)
+
+Maybe you could try again in another life...
+
+Thanks for playing!
+"""
+    print(defeat_message)
 
 def is_valid_exit(exits, chosen_exit):
     """This function checks, given a dictionary "exits" (see map.py) and

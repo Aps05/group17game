@@ -52,7 +52,7 @@ You have the stairs back down to the atrium.""",
 
     "requirements": [],
 
-    "enemies": [enemy_mutant, enemy_ghost]
+    "enemies": [enemy_ghost]
 }
 
 room_isolation = {
@@ -99,7 +99,7 @@ anything crawling around, so assume you it is safe.""",
 
     "exits": {"west": "Isolation", "south": "Reception"},
 
-    "items": [],
+    "items": [item_clue2],
 
     "requirements": [],
 
@@ -225,7 +225,7 @@ the ICU room.""",
 
     "requirements": [],
 
-    "enemies": [enemy_mutant]
+    "enemies": [enemy_ghost]
 }
 
 room_morgue = {
@@ -249,7 +249,7 @@ by venturing into the room""",
     
     "exits": {"south": "Icu"},
 
-    "items": [item_medicine, item_note4],
+    "items": [item_medicine, item_note4, item_clue1],
 
     "requirements": [],
 
@@ -300,7 +300,7 @@ You know your sanity level will seriously drop if you enter the room.""",
     
     "exits": {"west": "Basement"},
 
-    "items": [item_note6, item_medicine, item_medicine],
+    "items": [item_note6, item_medicine, item_medicine, item_clue3],
 
     "requirements": [],
 

@@ -24,8 +24,11 @@ while sumOfNotes == 0:
         sumOfNotes += item
 
 if sumOfNotes > 0:
+    # Convert to binary
     finalCode = convertToBinary(sumOfNotes)
 else:
+    # In case of negative, randomising wether the system should use sign and 
+    # magnitude or two's complement
     method = random.randrange(0, 1)
     if method == 0:
         # Use Sign and Magnitude
@@ -287,6 +290,56 @@ item_note6 = {
     "power": 0,
     
     "content": note6
+}
+
+item_clue1 = {
+    "id": "clue1",
+    
+    "name": "clue number 1",
+    
+    "description":
+    """To whoever finds this,
+The doctors in here are sick. They have us locked in this nightmare of a hospital
+with no way of escaping. They use the door. A big metal door. But only they know
+the code. I tried to take a peak at it once but that did not end well for me...
+Still though, I remember it consisted of only 0s and 1s.
+If only I had taken a better look...""",
+
+    "usable": False,
+    
+    "power": 0
+}
+
+item_clue2 = {
+    "id": "clue2",
+    
+    "name": "clue number 2",
+    
+    "description":
+    """I hope whoever is reading this can make out my writing. I have tried for
+weeks to escape this hellhole, but with no avail. I seem to recall the code 
+system having some connection with sign & magnitude, but my mind is frail,
+so perhaps you shouldn’t trust what I say...""",
+
+    "usable": False,
+    
+    "power": 0
+}
+
+item_clue3 = {
+    "id": "clue3",
+    
+    "name": "clue number 3",
+    
+    "description":
+    """You can’t escape. You might as well give up. I’ve tried so many times.
+If only I knew what two’s complement is? If to whom ever finds this note knows
+anything about this bizarre method, by all means try an escape, not that your mind
+will ever recover from the images seared into your retinas from this retched hospital.""",
+
+    "usable": False,
+    
+    "power": 0
 }
 
 items = {
