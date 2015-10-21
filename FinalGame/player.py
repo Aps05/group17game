@@ -20,7 +20,6 @@ player = {
     # Initialising sanity, health and faith values
     "health": 100,
     "sanity": 100,
-    "faith": 50,
     
     # The player could try and use his fists to fight off enemies... Who are we to judge
     "power": 10

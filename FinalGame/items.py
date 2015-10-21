@@ -87,7 +87,7 @@ item_bible = {
 
     "description": 
     """A copy of the Holy Bible. You can read the scriptures to learn of the 
-miracles of the Lord and increase your faith. It will only work for so long""",
+miracles of the Lord and increase your sanity. Only the first time though.""",
     
     "usable": False,
     
@@ -129,7 +129,8 @@ item_crucifix = {
 
     "description":
     """The is a small wooden crucifix with a model of Christ on it. You know 
-that this has great power and can be used to drive away Evil.""",
+that this has great power and can be used to drive away Evil.
+Using it will restore your sanity.""",
     
     "usable": False,
     

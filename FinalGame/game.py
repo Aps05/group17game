@@ -428,6 +428,14 @@ def restore_health(health):
     # Player health cannot exceed 100
     if player["health"] > 100:
         player["health"] = 100
+        
+def restore_sanity(sanity):
+    # Increases player's health
+    player["sanity"] += sanity
+    
+    # Player health cannot exceed 100
+    if player["sanity"] > 100:
+        player["sanity"] = 100
 
 def is_binary(value):
     """This function checks if the value it is given is a binary number and returns
@@ -482,6 +490,11 @@ def execute_go(direction, room):
             return
         player["previous_room"] = player["current_room"]
         player["current_room"] = move(room["exits"], direction)
+        # For every move the player loses 10 sanity
+        player["sanity"] -= 6
+        # Warn the player if his sanity level drops below 40
+        if player["sanity"] < 40:
+            print("You're sanity level is dropping. If you let it drop completely you will go insane!")
     else:
         print("You can't go that way.")
         print()
@@ -528,17 +541,31 @@ def execute_use(item_id):
     """This function checks if item_id is in the player's inventory, checks if
     that item is usable and executes it's use function.
     """
+    # Check if the player has the item
     if items[item_id] in player["inventory"]:
         if item_id == "notepad":    
             print_notepad_menu()
+            
         elif item_id == "beans":
             restore_health(20)
             print("You ate a tin of beans.")
             player["inventory"].remove(item_beans)
+            
         elif item_id == "medicine":
             restore_health(35)
             print("You used the medicine.")
             player["inventory"].remove(item_medicine)
+            
+        elif item_id == "bible":
+            restore_sanity(25)
+            print("You read the bible and it helped restore your sanity.")
+            player["inventory"].remove(item_bible)
+            
+        elif item_id == "crucifix":
+            restore_sanity(20)
+            print("You put your faith on the crucifix and it helped restore your sanity.")
+            player["inventory"].remove(item_crucifix)
+            
         else:
             print("You can't use this item.")
     else:
@@ -885,7 +912,8 @@ def main():
             # Display game status (room description, inventory, current health)
             print_room(player["current_room"])
             print_inventory_items(player["inventory"])
-            print("Health: " + get_health_bar(player["health"]) + "\n")
+            print("Health: " + get_health_bar(player["health"]))
+            print("Sanity: " + get_health_bar(player["sanity"]) + "\n")
     
             # Show the menu with possible actions and ask the player
             command = menu(player["current_room"]["exits"], player["current_room"]["items"], player["inventory"], player["current_room"]["enemies"])

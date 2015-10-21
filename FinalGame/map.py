@@ -52,7 +52,7 @@ You have the stairs back down to the atrium.""",
 
     "requirements": [],
 
-    "enemies": [enemy_ghost]
+    "enemies": []
 }
 
 room_isolation = {

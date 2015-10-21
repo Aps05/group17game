@@ -8,10 +8,6 @@ enemy_mutant = {
     "health": 100,
     
     "damage": 30,
-    
-    "sanity": 20,
-    
-    "faith": 15
 }
 
 enemy_ghost = {
@@ -24,12 +20,9 @@ enemy_ghost = {
     "health": 100,
     
     "damage": 15,
-    
-    "sanity": 20,
-    
-    "faith": 15
 }
 
 enemies = {
-    "mutant": enemy_mutant
+    "mutant": enemy_mutant,
+    "ghost": enemy_ghost
 }
