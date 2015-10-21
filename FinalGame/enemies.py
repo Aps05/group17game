@@ -21,7 +21,7 @@ enemy_ghost = {
     
     "description": "There is a super-human mutant patrolling the room.",
     
-    "health": 70,
+    "health": 100,
     
     "damage": 15,
     

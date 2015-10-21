@@ -2,12 +2,12 @@
 
 import random
 import os.path
-from map import rooms
+from map import *
 from player import *
 from items import *
-from parser_input import *
 from enemies import *
-
+from parser_input import *
+    
 def load_current_room(file):
     """This function finds and reads the current_room from a file 'file' and
     stores it in player['current_room'].
@@ -267,7 +267,6 @@ def exit_leads_to(exits, direction):
     """
     return rooms[exits[direction]]["name"]
 
-
 def print_exit(direction, leads_to):
     """This function prints a line of a menu of exits. It takes a direction (the
     name of an exit) and the name of the room into which it leads (leads_to),
@@ -294,7 +293,7 @@ def print_menu(exits, room_items, inv_items):
         print_exit(direction, exit_leads_to(exits, direction))
     # Print any items in the room
     for item in room_items:
-        print("TAKE " + item["id"].upper().strip("1, 2, 3, 4, 5, 6") + " to take " + item["name"] + ".")
+        print("TAKE " + item["id"].upper() + " to take " + item["name"] + ".")
     # Print any items in the player's inventory
     for item in inv_items:
         print("DROP " + item["id"].upper() + " to drop your " + item["id"] + ".")
@@ -308,6 +307,22 @@ def print_menu(exits, room_items, inv_items):
     print("Go to main MENU.")
     
     print("What do you want to do?")
+
+def print_victory():
+    victory_message = """Congratulations!
+You have escaped the torments of the asylum. You are the first person ever to
+have done so, so be proud of yourself. However, out in the real world, you might find you can never truly 
+live in reality. Your long, painful journey through the asylum has infected your mind. You are infected so 
+much that you may never truly escape the asylum mentally.
+
+Thanks for playing!
+
+"""    
+    
+    print(victory_message)
+    
+def print_defeat():
+    print("DEFEAT")
 
 def is_valid_exit(exits, chosen_exit):
     """This function checks, given a dictionary "exits" (see map.py) and
@@ -347,7 +362,6 @@ def erase_notepad():
                 break
             else:
                 n += 1
-                
     return
     
 def display_notepad():
@@ -362,7 +376,7 @@ def display_notepad():
         n += 1
     print()    
     return
-    
+
 def print_notepad_menu():
     """This function prints the notepad menu and receives an input from the user
     """
@@ -390,6 +404,54 @@ def print_notepad_menu():
         else:
             print("That's not a valid command.")
 
+def restore_health(health):
+    # Increases player's health
+    player["health"] += health
+    
+    # Player health cannot exceed 100
+    if player["health"] > 100:
+        player["health"] = 100
+
+def is_binary(value):
+    """This function checks if the value it is given is a binary number and returns
+    True, if it's not it returns False.
+    """
+    try:
+        for ch in value:
+            if (ch != "1") and (ch != "0"):
+                return False
+        return True
+    except ValueError:
+        return False
+
+def execute_exit():
+    """This function allows the player to try and exit the hospital and win the game.
+    They have to enter the correct binary number in order to win. This function checks if
+    the input is a binary number, and then compares the binary number with the binary
+    number that we created at the initialisation stage of the game.
+    """    
+    # We are using the global variable 'victory' assigned in player.py
+    global victory
+    
+    print("This door is locked. It looks like it requires a combination in order to unlock...")
+    print("Etner the combination or leave blank to return.")
+    
+    while True:
+        user_code = input("Combination > ")
+        print()
+        # If left blank return to Atrium        
+        if user_code == "":
+            return
+        # If code cosists of only 1s and 0s check if it's the correct code.
+        elif is_binary(user_code):
+            if user_code == room_exit["combination"]:
+                victory = True
+                return
+            else:
+                print("That's not the correct code...")
+        else:
+            print("You can only enter 0s or 1s on this key pad.")
+
 def execute_go(direction, room):
     """This function, given the direction (e.g. "south") updates the current room
     to reflect the movement of the player if the direction is a valid exit
@@ -398,8 +460,11 @@ def execute_go(direction, room):
     """
     global player
     if direction in room["exits"]:
+        if move(room["exits"], direction) == rooms["Exit"]:
+            execute_exit()
+            return
         player["previous_room"] = player["current_room"]
-        player["current_room"] = rooms[room["exits"][direction]]
+        player["current_room"] = move(room["exits"], direction)
     else:
         print("You can't go that way.")
         print()
@@ -416,11 +481,17 @@ def execute_take(item_id, room):
     elif items[item_id] not in room["items"]:
         print("You don't see " + items[item_id]["name"])
     else:
-        player["inventory"].append(items[item_id])
-        room["items"].remove(items[item_id])
-        print("You took",items[item_id]["name"])
-        return
-            
+        count = 0
+        for item in player["inventory"]:
+            count += 1
+        if count >=5:
+            print("You have too many items already. You need to drop something first.\n")
+        else:
+            player["inventory"].append(items[item_id])
+            room["items"].remove(items[item_id])
+            print("You took",items[item_id]["name"])
+            return
+
 def execute_drop(item_id, room):
     """This function takes an item_id as an argument and moves this item from the
     player's inventory to list of items in the current room. However, if there is
@@ -443,6 +514,16 @@ def execute_use(item_id):
     if items[item_id] in player["inventory"]:
         if item_id == "notepad":    
             print_notepad_menu()
+        elif item_id == "beans":
+            restore_health(20)
+            print("You ate a tin of beans.")
+            player["inventory"].remove(item_beans)
+        elif item_id == "medicine":
+            restore_health(35)
+            print("You used the medicine.")
+            player["inventory"].remove(item_medicine)
+        else:
+            print("You can't use this item.")
     else:
         print("You do not have " + items[item_id]["name"])
         
@@ -597,7 +678,7 @@ def attempt_attack(enemy, weapon):
             return 0
     else:
         print("The enemy managed to dodge your attack!\n")
-    # Warning the player that the enemy will attack him so he doesn't get lost.
+    # Warning the player that the enemy will attack him back.
     input("{ The enemy is retaliating! Hopefully you will be quick enough to dodge him. }")    
     print()
     # 40% chance to dodge
@@ -609,51 +690,59 @@ def attempt_attack(enemy, weapon):
         
     return enemy["health"]
 
-def print_healths(player, enemy):
-    player_health = player // 2
+def get_health_bar(health):
+    """This function takes an intiger 'health' and returns a health bar in the form
+    of a string made up of the symbol '='
+    """
+    player_health = health // 2
     player_health_bar = ""
-            
+    
     for n in range(0, player_health):
         player_health_bar += "="   
-    print("Your health:  " + player_health_bar)
-    
-    enemy_health = enemy // 2
-    enemy_health_bar = ""
-    
-    for n in range(0, enemy_health):
-        enemy_health_bar += "="   
-    print("Enemy health: " + enemy_health_bar)
+    return player_health_bar
 
 def execute_engage(enemies):
     """This function handles the combat system according the weapons the player
     has at his disposal. If can also use his fists to fight although that will
     almost always get him killed.
     """
+    # We are using the global variable 'defeat' assigned in player.py
+    global defeat
+    
     for enemy in enemies: 
         print(list_of_weapons(items))
         print()
         print("You've engaged the " + enemy["name"] + "!\n")
         print("You could try and dodge his next attack, or attack him first.\n")
         while True:
-            print_healths(player["health"],enemy["health"])
-            if player["health"] == 0:
-                print("You've been killed by the " + enemy["name"] + "...")
+            # Print player health
+            print("Player Health: ", get_health_bar(player["health"]))
+            # Print enemy health
+            print("Enemy Health:  ", get_health_bar(enemy["health"]))
+            # Check if player is dead
+            if player["health"] <= 0:
+                print("You've been killed by the " + enemy["name"] + "...\n")
+                defeat = True
                 return
-                
+            # Check if enemy is dead and remove him from the room
             if enemy["health"] == 0:
-                print("You've killed the " + enemy["name"] + "!")
+                print("You've killed the " + enemy["name"] + "!\n")
                 player["current_room"]["enemies"].remove(enemy)
                 enemy["health"] = 100
                 return
 
             action = input("You must act quickly. > ")
             action = normalise_input(action, valid_for_engage)
+            
             if action == []:
                 print("Thank makes no sence.")
+                
             elif (action[0] == "dodge") or (action[0] == "jump"):
                 enemy["health"] = attempt_dodge(enemy)
+                
             elif (action[0] == "attack") or (action[0] == "land"):
                 if len(action) > 1:
+                    # The player can use his fist(s) to attack which are not an item in his inventory
                     if (action[1] == "fists") or (action[1] == "fist") or (items[action[1]] in player["inventory"]):
                         enemy["health"] = attempt_attack(enemy, action[1])
                     else:
@@ -671,7 +760,7 @@ def prepare_engage(enemies):
     """This function serves as a warning to the player that there are 1 or more
     enemies in the room he entered. He's given the choice of engaging or retreiving.
     """
-    while True:
+    while (defeat == False):
         print("You've come across " + list_of_enemies(enemies) + "!")
         print("You cannot proceed unless you can clear the room.")
         print()
@@ -734,43 +823,58 @@ def main_menu(game_started):
     else:
         print("Continue Game")
     print("Load Game\nSave Game\nQuit Game")
-    #Get input from user
-    choice = str(input("> Chose Option: "))
-    print()
-    #make all letters lower case
-    choice = choice.lower()
     
-    if (choice == "new game") or (choice == "new"):
-        return ""
-    if (choice == "continue game") or (choice == "continue"):
-        return ""
-    elif (choice == "load game") or (choice == "load"):
-        load_game()
-        return ""
-    elif (choice == "save game") or (choice == "save"):
-        save_game()
-    elif (choice == "quit game") or (choice == "quit"):
-        return "Quit"
+    while True:
+        #Get input from user
+        choice = str(input("Chose Option > "))
+        print()
+        #make all letters lower case
+        choice = choice.lower()
+    
+        if (choice == "new game") or (choice == "new"):
+            return ""
+        if (choice == "continue game") or (choice == "continue"):
+            return ""
+        elif (choice == "load game") or (choice == "load"):
+            load_game()
+            return ""
+        elif (choice == "save game") or (choice == "save"):
+            save_game()
+            return ""
+        elif (choice == "quit game") or (choice == "quit"):
+            return "Quit"
+        else:
+            print("This makes no sense.")
+
+
 
 # This is the entry point of our program
 def main():
-    game_started = False
-    # Print main menu and heck if player wants to quit
-    menu_option = main_menu(game_started)
+    # Print main menu
+    menu_option = main_menu(False)
+    game_started = True
     
     # Main game loop
     # If player wants to quit don't enter loop
     while menu_option != "Quit":
-        game_started = True
-        # Display game status (room description, inventory etc.)
-        print_room(player["current_room"])
-        print_inventory_items(player["inventory"])
-
-        # Show the menu with possible actions and ask the player
-        command = menu(player["current_room"]["exits"], player["current_room"]["items"], player["inventory"], player["current_room"]["enemies"])
-
-        # Execute the player's command
-        menu_option = execute_command(command, player["current_room"])
+        # If game ended print appropriate screen and return to main menu
+        if defeat:
+            print_defeat()
+            return
+        elif victory:
+            print_victory()
+            return
+        else:
+            # Display game status (room description, inventory, current health)
+            print_room(player["current_room"])
+            print_inventory_items(player["inventory"])
+            print("Health: " + get_health_bar(player["health"]) + "\n")
+    
+            # Show the menu with possible actions and ask the player
+            command = menu(player["current_room"]["exits"], player["current_room"]["items"], player["inventory"], player["current_room"]["enemies"])
+            # Execute the player's command
+            menu_option = execute_command(command, player["current_room"])
+        
         # If player asks for main menu, display main menu
         if menu_option == "menu":
             menu_option = main_menu(game_started)

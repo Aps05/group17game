@@ -1,7 +1,38 @@
 import random
+from binaryConverter import *
 
 
-note4 = random.randrange(-100, 100)
+# Stores the sum of all numbers from the notes
+sumOfNotes = 0
+# In case of negative sum, 0 indicates Sign and Magnitude, 1 indicated Two's Complement
+method = 0
+# Used to store the final code required to win the game in binary form
+finalCode = 0
+
+# A sum of 0 would make the game too easy, so we generate new numbers in that case
+while sumOfNotes == 0:
+    note1 = random.randrange(-100, 100)
+    note2 = random.randrange(-100, 100)
+    note3 = random.randrange(-100, 100)
+    note4 = random.randrange(-100, 100)
+    note5 = random.randrange(-100, 100)
+    note6 = random.randrange(-100, 100)
+    # Adding all game notes in a list
+    notes = [note1, note2, note3, note4, note5, note6]
+    # Getting the sum the numbers on the notes
+    for item in notes:
+        sumOfNotes += item
+
+if sumOfNotes > 0:
+    finalCode = convertToBinary(sumOfNotes)
+else:
+    method = random.randrange(0, 1)
+    if method == 0:
+        # Use Sign and Magnitude
+        finalCode = convertToSignMagnitude(sumOfNotes)
+    else:
+        # Use Two's Complement
+        finalCode = convertToTwosComplement(sumOfNotes)
 
 item_torch = {
     "id": "torch",
@@ -83,7 +114,7 @@ item_water = {
     """You pick up some water with a small crucifix in, you determine it's Holy 
 water. You are aware from a book that it can be used to fight daemons.""",
     
-    "usable": False,
+    "usable": True,
     
     "power": 0
 }
@@ -125,7 +156,7 @@ item_beans = {
     """An old tin of beans. Look very old but they were made before use-by dates 
 so they must be edible""",
     
-    "usable": False,
+    "usable": True,
     
     "power": 0
 }
@@ -140,7 +171,7 @@ item_medicine = {
 relieving pain or dropping a fever. Theres not nearly enough to cause 
     overdose...""",
     
-    "usable": False,
+    "usable": True,
     
     "power": 0
 }
@@ -177,54 +208,51 @@ item_notepad = {
 item_note1 = {
     "id": "note1",
     
-    "name": "a note numbered 37",
+    "name": "a note numbered " + str(note1),
     
-    "description":
-    """A burnt note. You can barely see the writing on it. '37'""",
+    "description": "A burnt note. You can barely see the writing on it. '" + str(note1) + "'",
     
     "usable": False,
     
     "power": 0,
     
-    "content": 37
+    "content": note1
 }
 
 item_note2 = {
     "id": "note2",
     
-    "name": "a note numbered 23",
+    "name": "a note numbered " + str(note2),
     
-    "description":
-    """A burnt note. You can barely see the writing on it. '23'""",
+    "description": "A burnt note. You can barely see the writing on it. '" + str(note2) + "'",
     
     "usable": False,
     
     "power": 0,
     
-    "content": 23
+    "content": note2
 }
 
 item_note3 = {
     "id": "note3",
     
-    "name": "a note numbered 12",
+    "name": "a note numbered " + str(note3),
     
-    "description":
-    """A burnt note. You can barely see the writing on it. '12'""",
+    "description": "A burnt note. You can barely see the writing on it. '" + str(note3) + "'",
     
     "usable": False,
     
     "power": 0,
     
-    "content": 12
+    "content": note3
 }
 
 item_note4 = {
     "id": "note4",
     
-    "name": "a note numbered "+str(note4),
+    "name": "a note numbered " + str(note4),
     
-    "description": "A burnt note. You can barely see the writing on it. '"+str(note4)+"'",
+    "description": "A burnt note. You can barely see the writing on it. '" + str(note4) + "'",
     
     "usable": False,
     
@@ -236,31 +264,29 @@ item_note4 = {
 item_note5 = {
     "id": "note5",
     
-    "name": "a note numbered 5",
+    "name": "a note numbered " + str(note5),
     
-    "description":
-    """A burnt note. You can barely see the writing on it. '5'""",
+    "description": "A burnt note. You can barely see the writing on it. '" + str(note5) + "'",
     
     "usable": False,
     
     "power": 0,
     
-    "content": 5
+    "content": note5
 }
 
 item_note6 = {
     "id": "note6",
     
-    "name": "a note numbered -46",
+    "name": "a note numbered " + str(note6),
     
-    "description":
-    """A burnt note. You can barely see the writing on it. '-46'""",
+    "description": "A burnt note. You can barely see the writing on it. '" + str(note6) + "'",
     
     "usable": False,
     
     "power": 0,
     
-    "content": -46
+    "content": note6
 }
 
 items = {

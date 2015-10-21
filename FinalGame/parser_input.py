@@ -4,7 +4,8 @@ import string
 valid_for_menu = ['north', 'east', 'south', 'west', 'go', 'take', 'drop',
                'knife', 'torch', 'axe', 'salt', 'bible', 'water', 'crucifix',
                'quit', 'exit', 'menu', 'up', 'down', 'key', 'beans', 'medicine',
-               'shoes', 'notepad', 'use', 'inspect', 'look']
+               'shoes', 'notepad', 'use', 'inspect', 'look', 'note1', 'note2',
+               'note3', 'note4', 'note5', 'note6']
                
 valid_for_notepad = ['write', 'erase','close', 'view']
 

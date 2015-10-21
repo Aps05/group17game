@@ -1,5 +1,10 @@
 from items import *
-from map import rooms
+from map import *
+
+# Global variable, displays victory screen and stops the game when set to True
+victory = False
+# Global variable, displays defeat screen and stops the game when set to True
+defeat = False
 
 player = {
     # Start game at the reception
@@ -9,6 +14,8 @@ player = {
 
     # Start with an empty inventory
     "inventory": [item_axe],
+    # The number of items the player can hold at any one time
+    "inv_space": 5,
 
     # Initialising sanity, health and faith values
     "health": 100,
@@ -18,12 +25,3 @@ player = {
     # The player could try and use his fists to fight off enemies... Who are we to judge
     "power": 10
 }
-
-def new_game():
-    global inventory
-    global current_room
-    
-    inventory = []
-
-    # Start game at the reception
-    current_room = rooms["Atrium"]

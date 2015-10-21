@@ -20,7 +20,7 @@ You really are out of your comfort zone.""",
 
     "look": "This is the room you started in, or at least you think it is.",
 
-    "exits": {"down": "Basement", "east": "Canteen", "west": "Ward", "up": "Reception"},
+    "exits": {"down": "Basement", "east": "Canteen", "west": "Ward", "up": "Reception", "south": "Exit"},
 
     "items": [item_notepad, item_note4],
 
@@ -307,6 +307,33 @@ You know your sanity level will seriously drop if you enter the room.""",
     "enemies": [enemy_mutant]
 }
 
+room_exit = {
+    "id": "Exit",
+    
+    "name": "the only exit from this hospital.",
+    
+    "description":
+    """No Description Yet""",
+    
+    "look": """A big metal door. It looks unbreakable, though it looks like there
+are scratches on its surface. It doesn't have a key lock. Instead, it requires a code
+combination to open. They key pad has only 2 buttons for the code, 0 and 1. Strange...""",
+
+    "exits": {},
+
+    "items": [],
+
+    "enemies": [],
+    
+    "combination": finalCode
+}
+
+room_victory = {
+    "id": "Victory",
+    
+    "name": "VICTORY!"
+}
+
 rooms = {
     "Atrium": room_atrium,
     "Reception": room_reception,
@@ -319,5 +346,6 @@ rooms = {
     "Icu": room_icu,
     "Morgue": room_morgue,
     "Basement": room_basement,
-    "Dmorgue": room_dmorgue
+    "Dmorgue": room_dmorgue,
+    "Exit": room_exit
 }
