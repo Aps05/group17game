@@ -103,12 +103,44 @@ def load_rooms(file):
             found_rooms = True
             continue
 
+def load_enemies(file):
+    """This function reads all the room enemies that were stored in a file 'file'
+    and adds them to the correct room
+    """
+    global rooms
+    found_rooms = False
+    found_room = ""
+    
+    for line in file:
+        if found_rooms:
+            #end the loop when all rooms are loaded
+            if line == "END ROOM ENEMIES\n":
+                found_rooms = False
+                break
+            #start loading each room's items
+            line = line.strip("\n")
+            if line == line.upper():
+                #the method .title() capitalises the 1st letter
+                #of each word in the string
+                line = line.lower()
+                found_room = line.title()
+                continue
+            elif (found_room != "") and (line != ""):
+                rooms[found_room]["enemies"].append(enemies[line])
+            else:
+                found_room = ""
+                continue
+        elif (line == "ROOM ENEMIES\n"):
+            found_rooms = True
+            continue
+
 def empty_rooms():
     """This function emptys all the items from all the rooms.
     """
     global rooms
     for roomId,room in rooms.items():
         rooms[roomId]["items"] = []
+        rooms[roomId]["enemies"] = []
         
 def load_notepad(file):
     """This function finds the line labled 'NOTEPAD' in a file 'file' and stores
@@ -184,6 +216,8 @@ def load_game():
         # that were storedin save.txt        
         empty_rooms()
         load_rooms(file)
+        # load room monsters
+        load_enemies(file)
         # load the notepad
         load_notepad(file)
         # Load the all the note numbers and the finalCode
@@ -227,6 +261,16 @@ def save_game():
             file.write(item["id"])
             file.write("\n")
     file.write("END ROOMS\n\n")
+    
+    # Write room enemies
+    file.write("ROOM ENEMIES\n")
+    for roomId,room in rooms.items():        
+        file.write(roomId.upper())
+        file.write("\n")
+        for enemy in room["enemies"]:
+            file.write(enemy["id"])
+            file.write("\n")
+    file.write("END ROOM ENEMIES\n\n")  
     
     # Write the contents of the notepad
     file.write("NOTEPAD\n")
@@ -827,7 +871,7 @@ def attempt_dodge(enemy):
                 else:
                     print("That's not a valid option!\n")
                     
-            print(get_health_bar(player["health"]))
+            print("Enemy Health: " + get_health_bar(player["health"]) + "\n")
                 
             # If enemy health reaches 0 then exit the function and return 0 as the new health
             if enemy["health"] <= 0:

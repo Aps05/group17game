@@ -1,63 +1,84 @@
 HEALTH
-100
+55
 SANITY
-94
+88
 
 INVENTORY
 knife
+beans
 
 ROOMS
 ICU
 note4
 medicine
-EXIT
-CARE
-clue2
+ISOLATION
+water
 DMORGUE
 note6
 medicine
 medicine
 clue3
-ATRIUM
-letter
-notepad
-note4
-BASEMENT
-note5
-beans
-ISOLATION
-water
+EXIT
+CANTEEN
 WARD
 key
-MORGUE
-medicine
-clue1
-shoes
 DINING
 axe
 note3
 beans
+ATRIUM
+letter
+notepad
+note4
+CARE
+clue2
+BASEMENT
+note5
+beans
+MORGUE
+medicine
+clue1
+shoes
 ELECTRO
 note2
 torch
 RECEPTION
 bible
 crucifix
-CANTEEN
-beans
 END ROOMS
+
+ROOM ENEMIES
+ICU
+ghost
+ISOLATION
+DMORGUE
+mutant
+EXIT
+CANTEEN
+WARD
+DINING
+ATRIUM
+CARE
+BASEMENT
+mutant
+MORGUE
+mutant
+ELECTRO
+mutant
+RECEPTION
+END ROOM ENEMIES
 
 NOTEPAD
 Watch your step!
 
 NOTES
--79
-25
--9
-83
-12
--51
-110011
+-26
+-89
+0
+32
+-47
+-17
+10010011
 
 CURRENT ROOM
-Canteen
+Dining

@@ -22,7 +22,7 @@ You really are out of your comfort zone.""",
 
     "exits": {"down": "Basement", "east": "Canteen", "west": "Ward", "up": "Reception", "south": "Exit"},
 
-    "items": [item_letter, item_notepad, item_note4],
+    "items": [item_letter, item_notepad, item_note1],
 
     "requirements": [],
 
