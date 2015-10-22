@@ -271,7 +271,7 @@ banging. On the door it says 'FEAR ME' in what looks like blood. You are sure
 you can get through though, or back up the service elevator to the Atrium.""",
 
     "look": """You can’t see anything in the basement, but you assume it is dark.
-You can see engravings of the number 5 splattered on the lift shaft.""",
+You can see engravings of 0s and 1s on the lift shaft.""",
     
     "exits": {"up": "Atrium", "east": "Dmorgue"},
 

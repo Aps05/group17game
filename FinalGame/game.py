@@ -349,6 +349,27 @@ def print_menu(exits, room_items, inv_items):
     
     print("What do you want to do?")
 
+def print_game_title():
+    game_tite = """
+   #                                                  #######                                             
+  # #    ####  #   # #      #    # #    #             #        ####   ####    ##   #####  # #    #  ####  
+ #   #  #       # #  #      #    # ##  ##             #       #      #    #  #  #  #    # # ##   # #    # 
+#     #  ####    #   #      #    # # ## #    #####    #####    ####  #      #    # #    # # # #  # #      
+#######      #   #   #      #    # #    #             #            # #      ###### #####  # #  # # #  ### 
+#     # #    #   #   #      #    # #    #             #       #    # #    # #    # #      # #   ## #    # 
+#     #  ####    #   ######  ####  #    #             #######  ####   ####  #    # #      # #    #  ####  
+                                                                                                          
+                        ######                                                    
+                        #     #  ####  #   #  ####  #    #  ####   ####  #  ####  
+                        #     # #       # #  #    # #    # #    # #      # #      
+                        ######   ####    #   #      ###### #    #  ####  #  ####  
+                        #            #   #   #      #    # #    #      # #      # 
+                        #       #    #   #   #    # #    # #    # #    # # #    # 
+                        #        ####    #    ####  #    #  ####   ####  #  #### 
+
+"""
+    print(game_tite)
+
 def print_victory():
     victory_message = """
 __     _____ ____ _____ ___  ______   ___ 
@@ -933,6 +954,8 @@ def move(exits, direction):
     return rooms[exits[direction]]
 
 def main_menu(game_started):
+    # Print Game Title
+    print_game_title()
     # Print main menu
     print("MAIN MENU:\n")
     # If game has started print continue. Else print new game.
