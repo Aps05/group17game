@@ -89,7 +89,7 @@ item_bible = {
     """A copy of the Holy Bible. You can read the scriptures to learn of the 
 miracles of the Lord and increase your sanity. Only the first time though.""",
     
-    "usable": False,
+    "usable": True,
     
     "power": 0
 }
@@ -132,7 +132,7 @@ item_crucifix = {
 that this has great power and can be used to drive away Evil.
 Using it will restore your sanity.""",
     
-    "usable": False,
+    "usable": True,
     
     "power": 0
 }
@@ -343,6 +343,59 @@ will ever recover from the images seared into your retinas from this retched hos
     "power": 0
 }
 
+item_letter = {
+    "id": "letter",
+    
+    "name": "a letter from Dr Duncan Fitzgerald",
+    
+    "description":
+    """Diary entry from Dr Duncan Fitzgerald.
+9th January 1969.
+
+My name is Duncan Fitzgerald, and I am the last doctor alive in this retched psychiatric hospital.
+I came here with the intention to help patients with mental health problems. Little did I know that
+the whole facility is a façade. A façade to an inhuman experiment, an experiment which went horribly
+awry. The tests to the patients were unmerciful, and new, CIA experimental drugs were trialled in
+order to create a super-human which could end the Cold War and defeat the Russians. As I cottoned on
+to the purpose of this hospital, I inevitably tried to escape from the sick-minded doctors capable
+of such malicious activity.
+
+To whom ever is unlucky enough to be reading my last note, you must know there is ONE way to escape,
+and only the staff conducting the experiment know it. They are all dead, their experiments killed them.
+Don’t get alarmed by the things you will see. Keep your cool and whatever happens, DON’T LOSE YOUR SANITY!
+And don’t die of course. After months of escape attempts, I could not crack what seems to be a code to
+get out. I am held up in this room where I write to whoever finds this note and can maybe escape and put
+a stop to this madness. My attempts of escape have enlightened me to the following facts:
+
+The code to break free needs 6 sets of numbers, each hidden on notes in various rooms. I managed to find
+one however, and I believe it to be the first in the set of notes. I believe some sort of conversion to
+binary is needed to unlock the code, however I failed to crack it. To whom ever is brave enough to venture
+into this twisted hospital, know, it is not abandoned. Experimental failure has led to super-human-mutants
+able to roam free around the hospital. BEWARE. Your health will decrease if you are hit or slow to react to
+one of them. Your sanity is also likely to decay the more time you spend in this place. My only advice is to
+act fast, nimble and get the notes for binary conversion. This is the way out. I hope you have more luck
+than me. Feel free to use this notepad for jotting down any notes. Oh, one last remark, some of the codes
+are in rooms which are sealed off due to broken machinery and debris, as well as super-humans guarding the
+rooms. Maybe it is wise to tool up and get supplies before venturing too far into the bowels of the hospital.
+
+I hope my knowledge helps you get out of this place, however nothing I think will prepare you for the horrors
+of this psychiatric hospital. Good luck!
+""",
+
+    "usable": False,
+    
+    "power": 0
+}
+
+notes = {
+    "1": item_note1,
+    "2": item_note2,
+    "3": item_note3,
+    "4": item_note4,
+    "5": item_note5,
+    "6": item_note6
+}
+
 items = {
     "torch": item_torch,
     "axe": item_axe,
@@ -361,5 +414,9 @@ items = {
     "note3": item_note3,
     "note4": item_note4,
     "note5": item_note5,
-    "note6": item_note6
+    "note6": item_note6,
+    "clue1": item_clue1,
+    "clue2": item_clue2,
+    "clue3": item_clue3,
+    "letter": item_letter
 }

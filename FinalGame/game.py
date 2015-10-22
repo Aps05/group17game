@@ -104,6 +104,38 @@ def load_notepad(file):
             found_notepad = True
             continue
 
+def load_notes(file):
+    """This function finds the line labled 'NOTES' in a file 'file' and saves the next
+    6 lines of numbers in the 6 different notes of the game. The 7th line is the code
+    combination to win the level. It stores that in the 'Exit' room combination field.
+    """
+    # Used to know when we should start reading note numbers
+    found_notes = False
+    # Used to count through the 6 notes
+    note_number = 1
+    
+    for line in file:
+        if found_notes:
+            if line != "\n":
+                line = line.strip("\n")
+                # If all 6 note numbers found then the 7th number will be their sum in binary
+                if note_number == 7:
+                    room_exit["combination"] = line
+                    break
+                
+                # Get the current note
+                note = notes[str(note_number)]
+                note["content"] = int(line)
+                note["name"] = "a note numbered " + line
+                note["description"] = "A burnt note. You can barely see the writing on it. '" + line + "'"
+                note_number += 1
+                continue
+            break
+        elif line == "NOTES\n":
+            # NOTES title is found so we can start reading the numbers
+            found_notes = True
+            continue
+
 def load_game():
     """This function loads all the information stored in save.txt to restore
     the game to the state where it was saved.
@@ -122,6 +154,8 @@ def load_game():
         load_rooms(file)
         # load the notepad
         load_notepad(file)
+        # Load the all the note numbers and the finalCode
+        load_notes(file)
         # load the room the player was in        
         load_current_room(file)
         #close the file
@@ -138,13 +172,13 @@ def save_game():
     file = open("save.txt", 'r+')
 
     
-    # Save inventory
+    # Write inventory items
     file.write("INVENTORY\n")
     for item in player["inventory"]:
         file.write("%s\n" % item["id"])
     file.write("\n")
     
-    # Save room items
+    # Write room items
     file.write("ROOMS\n")
     for roomId,room in rooms.items():        
         file.write(roomId.upper())
@@ -154,13 +188,20 @@ def save_game():
             file.write("\n")
     file.write("END ROOMS\n\n")
     
-    # Save the contents of the notepad
+    # Write the contents of the notepad
     file.write("NOTEPAD\n")
     for line in item_notepad["content"]:
         file.write("%s\n" % line) 
     file.write("\n")
     
-    # Save current room
+    # Write the note numbers with the sum
+    file.write("NOTES\n")
+    for n in range(1,7):
+        file.write("%s\n" % notes[str(n)]["content"])
+    # Write the sum of the numbers in binary form (the final code)
+    file.write("%s\n\n" % finalCode)
+    
+    # Write the current room
     file.write("CURRENT ROOM\n")
     file.write(player["current_room"]["id"])
     
@@ -483,18 +524,44 @@ def execute_go(direction, room):
     (and prints the name of the room into which the player is
     moving). Otherwise, it prints "You cannot go there."
     """
-    global player
+    # We are using the global variable 'defeat' in case the player goes insane
+    global defeat
+    
     if direction in room["exits"]:
+        # If player is trying to exit the hospital prompt him for the code
         if move(room["exits"], direction) == rooms["Exit"]:
             execute_exit()
             return
+        
+        destination = move(room["exits"], direction)
+        # Check if the room the player is trying to access has any item requirements
+        if destination["requirements"] != []:
+            # Check if the player has the required item(s)
+            if destination["requirements"] not in player["inventory"]:
+                # Hint the player with the appropriate message so they know what to look for
+                if item_shoes in destination["requirements"]:
+                    print("There's broken glass on the stairs. You can't go up bare feet...")
+                    
+                if item_key in destination["requirements"]:
+                    print("This elevator is locked. Maybe there's a key laying arround...")
+                    
+                if item_torch in destination["requirements"]:
+                    print("It must be pitch black down there. I should probably find a source of light fist...")
+                    
+                return
+        
+        # Storing the previous room in case the player asks to go back when encountering an enemy
         player["previous_room"] = player["current_room"]
         player["current_room"] = move(room["exits"], direction)
-        # For every move the player loses 10 sanity
+        
+        # For every move the player makes he loses sanity
         player["sanity"] -= 6
         # Warn the player if his sanity level drops below 40
         if player["sanity"] < 40:
             print("You're sanity level is dropping. If you let it drop completely you will go insane!")
+        # If sanity reaches 0 then the player goes insane and loses the game.
+        if player["sanity"] <= 0:
+            defeat = True
     else:
         print("You can't go that way.")
         print()
@@ -565,6 +632,12 @@ def execute_use(item_id):
             restore_sanity(20)
             print("You put your faith on the crucifix and it helped restore your sanity.")
             player["inventory"].remove(item_crucifix)
+            
+        elif item_id == "water":
+            restore_health(15)
+            restore_sanity(15)
+            print("You drank the Holy Water slightly restoring your health and sanity.")
+            player["inventory"].remove(item_water)
             
         else:
             print("You can't use this item.")
@@ -664,10 +737,6 @@ def attempt_dodge(enemy):
         print("You managed to dodge the attack. You have enough time to strike swice!\n")
         # The player can now attack the enemy twice
         for i in [0, 1]:
-            # If enemy health reaches 0 then exit the function and return 0 as the new health
-            if enemy["health"] <= 0:
-                return 0
-            
             while True:
                 print(list_of_weapons(items))
                 print("Chose how you wish to attack:")
@@ -676,28 +745,32 @@ def attempt_dodge(enemy):
                 if (weapon == []):
                     print("Thank makes no sence.")
                 elif (weapon[0] == "fists") or (weapon[0] == "fist"):
-                    print("You strike the " + enemy["name"] + " using your fists for", player["power"], "damage.")
+                    print("You strike the " + enemy["name"] + " using your fists for", player["power"], "damage.\n")
                     enemy["health"] -= player["power"]
                     break
                 elif weapon[0] == "knife":
                     if item_knife in player["inventory"]:
-                        print("You strike the " + enemy["name"] + " using your knife for", item_knife["power"], "damage.")
+                        print("You strike the " + enemy["name"] + " using your knife for", item_knife["power"], "damage.\n")
                         enemy["health"] -= item_knife["power"]
                         break
                     else:
                         print("You don't have a knife!")
                 elif weapon[0] == "axe":
                     if item_axe in player["inventory"]:
-                        print("You strike the " + enemy["name"] + " using your axe for", item_axe["power"], "damage.")
+                        print("You strike the " + enemy["name"] + " using your axe for", item_axe["power"], "damage.\n")
                         enemy["health"] -= item_axe["power"]
                         break
                     else:
                         print("You don't have an axe!")
                 else:
                     print("That's not a valid option!\n")
+                
+            # If enemy health reaches 0 then exit the function and return 0 as the new health
+            if enemy["health"] <= 0:
+                return 0
     else:
-        print("You failed to dodge the attack and got hit by the " + enemy["name"] + "for", enemy["damage"] + "damage!")
-        player["health"] -= enemy["power"]
+        print("You failed to dodge the attack and got hit by the " + enemy["name"] + " for", enemy["damage"], "damage!\n")
+        player["health"] -= enemy["damage"]
         
     return enemy["health"]
 
@@ -776,6 +849,7 @@ def execute_engage(enemies):
                 return
 
             action = input("You must act quickly. > ")
+            print()
             action = normalise_input(action, valid_for_engage)
             
             if action == []:

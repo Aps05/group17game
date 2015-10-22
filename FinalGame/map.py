@@ -22,7 +22,7 @@ You really are out of your comfort zone.""",
 
     "exits": {"down": "Basement", "east": "Canteen", "west": "Ward", "up": "Reception", "south": "Exit"},
 
-    "items": [item_notepad, item_note4],
+    "items": [item_letter, item_notepad, item_note4],
 
     "requirements": [],
 
@@ -50,7 +50,7 @@ You have the stairs back down to the atrium.""",
 
     "items": [item_bible, item_crucifix],
 
-    "requirements": [],
+    "requirements": [item_shoes],
 
     "enemies": []
 }
@@ -122,7 +122,7 @@ a sulphur like substance... The only exit is back to the south to Isolation.""",
 
     "exits": {"south": "Isolation"},
 
-    "items": [item_note2],
+    "items": [item_note2, item_torch],
 
     "requirements": [],
 
@@ -148,7 +148,7 @@ small passage through to the dining hall.""",
 
     "items": [item_beans, item_knife],
 
-    "requirements": [item_shoes],
+    "requirements": [],
 
     "enemies": []
 }
@@ -170,7 +170,7 @@ This room looks bountiful, but you wonder if it is guarded by a mutant.""",
     
     "exits": {"west": "Canteen"},
 
-    "items": [item_axe, item_note3],
+    "items": [item_axe, item_note3, item_beans],
 
     "requirements": [],
 
@@ -196,7 +196,7 @@ apart from bloody bed sheets and broken medical equipment.""",
     
     "exits": {"west": "Icu", "east": "Atrium"},
 
-    "items": [item_medicine],
+    "items": [item_key],
 
     "requirements": [],
 
@@ -221,7 +221,7 @@ the ICU room.""",
     
     "exits": {"north": "Morgue", "east": "Ward"},
 
-    "items": [item_key],
+    "items": [item_note4, item_medicine],
 
     "requirements": [],
 
@@ -249,7 +249,7 @@ by venturing into the room""",
     
     "exits": {"south": "Icu"},
 
-    "items": [item_medicine, item_note4, item_clue1],
+    "items": [item_medicine,item_clue1, item_shoes],
 
     "requirements": [],
 
@@ -277,7 +277,7 @@ You can see engravings of the number 5 splattered on the lift shaft.""",
 
     "items": [item_note5, item_beans],
 
-    "requirements": [item_torch, item_shoes],
+    "requirements": [item_torch, item_key],
 
     "enemies": [enemy_mutant]
 }
@@ -322,6 +322,8 @@ combination to open. They key pad has only 2 buttons for the code, 0 and 1. Stra
     "exits": {},
 
     "items": [],
+
+    "requirements": [],
 
     "enemies": [],
     
