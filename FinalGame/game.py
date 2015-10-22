@@ -1054,7 +1054,7 @@ def main_menu(game_started):
     
     while True:
         #Get input from user
-        choice = str(input("Chose Option > "))
+        choice = str(input("Choose Option > "))
         print()
         #make all letters lower case
         choice = choice.lower()

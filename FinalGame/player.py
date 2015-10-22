@@ -13,9 +13,9 @@ player = {
     "previous_room": rooms["Atrium"],
 
     # Start with an empty inventory
-    "inventory": [],
+    "inventory": [item_crucifix],
     # The number of items the player can hold at any one time
-    "inv_space": 5,
+    "inv_space": 6,
 
     # Initialising sanity, health and faith values
     "health": 100,

@@ -122,7 +122,7 @@ a sulphur like substance... The only exit is back to the south to Isolation.""",
 
     "exits": {"south": "Isolation"},
 
-    "items": [item_note2, item_torch],
+    "items": [item_note4, item_torch],
 
     "requirements": [],
 
@@ -170,7 +170,7 @@ This room looks bountiful, but you wonder if it is guarded by a mutant.""",
     
     "exits": {"west": "Canteen"},
 
-    "items": [item_axe, item_note3, item_beans],
+    "items": [item_axe, item_note2, item_beans],
 
     "requirements": [],
 
@@ -221,7 +221,7 @@ the ICU room.""",
     
     "exits": {"north": "Morgue", "east": "Ward"},
 
-    "items": [item_note4, item_medicine],
+    "items": [item_note3, item_medicine],
 
     "requirements": [],
 
