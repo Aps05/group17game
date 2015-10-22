@@ -1,25 +1,59 @@
-INVENTORY
-notepad
+HEALTH
+100100INVENTORY
 
 ROOMS
+ICU
+note4
+medicine
+ISOLATION
+water
+CARE
+clue2
+WARD
+key
 ELECTRO
-ATRIUM
-knife
+note2
+torch
+BASEMENT
+note5
+beans
+EXIT
 DINING
+axe
+note3
+beans
+DMORGUE
+note6
+medicine
+medicine
+clue3
+RECEPTION
+bible
+crucifix
+ATRIUM
+letter
+notepad
+note4
+MORGUE
+medicine
+clue1
+shoes
 CANTEEN
 beans
-RECEPTION
-BASEMENT
-MORGUE
-ICU
-ISOLATION
-DMORGUE
-WARD
-CARE
+knife
 END ROOMS
 
 NOTEPAD
-this is a note
+Watch your step!
+
+NOTES
+-75
+-92
+-49
+75
+-23
+-72
+111101100
 
 CURRENT ROOM
-Ward
+Atrium

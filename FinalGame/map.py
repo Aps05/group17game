@@ -174,7 +174,7 @@ This room looks bountiful, but you wonder if it is guarded by a mutant.""",
 
     "requirements": [],
 
-    "enemies": [enemy_mutant]
+    "enemies": [enemy_ghost]
 }
 
 room_ward = {

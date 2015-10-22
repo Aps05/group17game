@@ -7,7 +7,31 @@ from player import *
 from items import *
 from enemies import *
 from parser_input import *
-    
+  
+def load_health(file):
+    """This function finds the line 'HEALTH' and loads the health level
+    of the player.
+    """
+    found_health = False
+    for line in file:
+        if found_health:
+            line = line.strip("\n")
+            player["health"] = int(line)
+        elif line == "HEALTH\n":
+            found_health = True
+            
+def load_sanity(file):
+    """This function finds the line 'SANITY' and loads the sanity level
+    of the player.
+    """
+    found_sanity = False
+    for line in file:
+        if found_sanity:
+            line = line.strip("\n")
+            player["sanity"] = int(line)
+        elif line == "SANITY\n":
+            found_sanity = True
+  
 def load_current_room(file):
     """This function finds and reads the current_room from a file 'file' and
     stores it in player['current_room'].
@@ -146,7 +170,11 @@ def load_game():
     else:
         # open save.txt in read mode
         file = open("save.txt", 'r')
-        #load inventory
+        # load health
+        load_health(file)
+        # load sanity
+        load_sanity(file)
+        # load inventory
         load_inventory(file)
         # emptry tooms of all items to add the items
         # that were storedin save.txt        
@@ -171,6 +199,10 @@ def save_game():
     file = open("save.txt", 'w')
     file = open("save.txt", 'r+')
 
+    # Write health and sanity levels
+    file.write("HEALTH\n")
+    file.write(str(player["health"]))
+    file.write(str(player["sanity"]))
     
     # Write inventory items
     file.write("INVENTORY\n")
@@ -558,18 +590,19 @@ def execute_go(direction, room):
         # Check if the room the player is trying to access has any item requirements
         if destination["requirements"] != []:
             # Check if the player has the required item(s)
-            if destination["requirements"] not in player["inventory"]:
-                # Hint the player with the appropriate message so they know what to look for
-                if item_shoes in destination["requirements"]:
-                    print("There's broken glass on the stairs. You can't go up bare feet...")
+            for item in destination["requirements"]:
+                if item not in player["inventory"]:
+                    # Hint the player with the appropriate message so they know what to look for
+                    if item_shoes in destination["requirements"]:
+                        print("There's broken glass on the stairs. You can't go up bare feet...")
                     
-                if item_key in destination["requirements"]:
-                    print("This elevator is locked. Maybe there's a key laying arround...")
+                    if item_key in destination["requirements"]:
+                        print("This elevator is locked. Maybe there's a key laying arround...")
                     
-                if item_torch in destination["requirements"]:
-                    print("It must be pitch black down there. I should probably find a source of light fist...")
+                    if item_torch in destination["requirements"]:
+                        print("It must be pitch black down there. I should probably find a source of light first...")
                     
-                return
+                    return
         
         # Storing the previous room in case the player asks to go back when encountering an enemy
         player["previous_room"] = player["current_room"]
@@ -755,7 +788,7 @@ def attempt_dodge(enemy):
     dodge_chance = random.randrange(1, 100)
     
     if dodge_chance > 50:
-        print("You managed to dodge the attack. You have enough time to strike swice!\n")
+        print("You managed to dodge the attack. You now have enough time to strike swice!\n")
         # The player can now attack the enemy twice
         for i in [0, 1]:
             while True:
@@ -764,7 +797,7 @@ def attempt_dodge(enemy):
                 weapon = input("> ")
                 weapon = normalise_input(weapon, valid_weapons)
                 if (weapon == []):
-                    print("Thank makes no sence.")
+                    print("Thank makes no sense.")
                 elif (weapon[0] == "fists") or (weapon[0] == "fist"):
                     print("You strike the " + enemy["name"] + " using your fists for", player["power"], "damage.\n")
                     enemy["health"] -= player["power"]
@@ -785,6 +818,8 @@ def attempt_dodge(enemy):
                         print("You don't have an axe!")
                 else:
                     print("That's not a valid option!\n")
+                    
+            print(get_health_bar(player["health"]))
                 
             # If enemy health reaches 0 then exit the function and return 0 as the new health
             if enemy["health"] <= 0:
@@ -817,8 +852,8 @@ def attempt_attack(enemy, weapon):
     else:
         print("The enemy managed to dodge your attack!\n")
     # Warning the player that the enemy will attack him back.
-    input("{ The enemy is retaliating! Hopefully you will be quick enough to dodge him. }")    
-    print()
+    print("{ The enemy is retaliating! Hopefully you will be quick enough to dodge him. }\n")    
+    input("Press enter to continue...")
     # 40% chance to dodge
     if dodge_chance > 60:
         print("You managed to dodge his attack!")
@@ -874,7 +909,7 @@ def execute_engage(enemies):
             action = normalise_input(action, valid_for_engage)
             
             if action == []:
-                print("Thank makes no sence.")
+                print("Thank makes no sense.")
                 
             elif (action[0] == "dodge") or (action[0] == "jump"):
                 enemy["health"] = attempt_dodge(enemy)
@@ -891,7 +926,7 @@ def execute_engage(enemies):
             elif (action[0] == "run") or (action[0] == "escape"):
                 print("The " + enemy["name"] + " is on to you. You can't escape.")
             else:
-                print("This makes no sence.")
+                print("This makes no sense.")
             
         
 
@@ -909,7 +944,7 @@ def prepare_engage(enemies):
         user_input = normalise_input(user_input, valid_for_prepareEngage)
         
         if user_input == []:
-            print("This makes no sence.")
+            print("This makes no sense.")
             continue
         elif user_input[0] == "engage":
             execute_engage(enemies)
