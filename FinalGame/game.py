@@ -107,8 +107,8 @@ def load_enemies(file):
     """This function reads all the room enemies that were stored in a file 'file'
     and adds them to the correct room
     """
-    global rooms
     found_rooms = False
+    # Used to store the current room we are reading items from
     found_room = ""
     
     for line in file:
@@ -1074,14 +1074,25 @@ def main_menu(game_started):
         else:
             print("This makes no sense.")
 
-
-
+def print_health_sanity_bars(border):
+    """This function receives a string 'border' and creates 2 more strings made
+    up of '=' symbols in order to emulate a health and sanity bar. The 'border'
+    string works as a border for the health and sanity bars.
+    """    
+    print(border + "|")
+    print("Health: " + get_health_bar(player["health"]) + "|")
+    print("Sanity: " + get_health_bar(player["sanity"]) + "|")
+    print(border + "|" + "\n")
+    
 # This is the entry point of our program
 def main():
     # Print main menu
     menu_option = main_menu(False)
     game_started = True
-    
+    border = ""
+    for i in range(1,59):    
+        border += "-"  
+        
     # Main game loop
     # If player wants to quit don't enter loop
     while menu_option != "Quit":
@@ -1096,9 +1107,8 @@ def main():
             # Display game status (room description, inventory, current health)
             print_room(player["current_room"])
             print_inventory_items(player["inventory"])
-            print("Health: " + get_health_bar(player["health"]))
-            print("Sanity: " + get_health_bar(player["sanity"]) + "\n")
-    
+            print_health_sanity_bars(border)
+            
             # Show the menu with possible actions and ask the player
             command = menu(player["current_room"]["exits"], player["current_room"]["items"], player["inventory"], player["current_room"]["enemies"])
             # Execute the player's command
