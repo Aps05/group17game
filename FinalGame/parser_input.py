@@ -5,7 +5,7 @@ valid_for_menu = ['north', 'east', 'south', 'west', 'go', 'take', 'drop',
                'knife', 'torch', 'axe', 'salt', 'bible', 'water', 'crucifix',
                'quit', 'exit', 'menu', 'up', 'down', 'key', 'beans', 'medicine',
                'shoes', 'notepad', 'use', 'inspect', 'look', 'note1', 'note2',
-               'note3', 'note4', 'note5', 'note6']
+               'note3', 'note4', 'note5', 'note6', 'clue1', 'clue2', 'clue3', 'letter']
                
 valid_for_notepad = ['write', 'erase','close', 'view']
 
