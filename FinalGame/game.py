@@ -7,7 +7,7 @@ from player import *
 from items import *
 from enemies import *
 from parser_input import *
-  
+
 def load_health(file):
     """This function finds the line 'HEALTH' and loads the health level
     of the player.
@@ -17,9 +17,11 @@ def load_health(file):
         if found_health:
             line = line.strip("\n")
             player["health"] = int(line)
+            return
         elif line == "HEALTH\n":
             found_health = True
-            
+            continue
+
 def load_sanity(file):
     """This function finds the line 'SANITY' and loads the sanity level
     of the player.
@@ -29,8 +31,10 @@ def load_sanity(file):
         if found_sanity:
             line = line.strip("\n")
             player["sanity"] = int(line)
+            return
         elif line == "SANITY\n":
             found_sanity = True
+            continue
   
 def load_current_room(file):
     """This function finds and reads the current_room from a file 'file' and
@@ -199,10 +203,14 @@ def save_game():
     file = open("save.txt", 'w')
     file = open("save.txt", 'r+')
 
-    # Write health and sanity levels
+    # Write sanity level
     file.write("HEALTH\n")
     file.write(str(player["health"]))
+    file.write("\n")
+    # Write sanity level
+    file.write("SANITY\n")
     file.write(str(player["sanity"]))
+    file.write("\n\n")
     
     # Write inventory items
     file.write("INVENTORY\n")
