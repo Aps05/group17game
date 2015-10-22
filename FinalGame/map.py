@@ -330,12 +330,6 @@ combination to open. They key pad has only 2 buttons for the code, 0 and 1. Stra
     "combination": finalCode
 }
 
-room_victory = {
-    "id": "Victory",
-    
-    "name": "VICTORY!"
-}
-
 rooms = {
     "Atrium": room_atrium,
     "Reception": room_reception,

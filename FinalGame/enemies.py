@@ -15,7 +15,7 @@ enemy_ghost = {
     
     "name": "Poltergeist",
     
-    "description": "There is a super-human mutant patrolling the room.",
+    "description": "There is a Poltergeist patrolling the room.",
     
     "health": 100,
     

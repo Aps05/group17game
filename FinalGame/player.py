@@ -21,6 +21,6 @@ player = {
     "health": 100,
     "sanity": 100,
     
-    # The player could try and use his fists to fight off enemies... Who are we to judge
+    # The player might want to try and fight the monster with his fists. Who are we to judge...
     "power": 10
 }
