@@ -300,7 +300,7 @@ You know your sanity level will seriously drop if you enter the room.""",
     
     "exits": {"west": "Basement"},
 
-    "items": [item_note6, item_medicine, item_medicine, item_clue3],
+    "items": [item_note6, item_medicine, item_clue3],
 
     "requirements": [],
 
